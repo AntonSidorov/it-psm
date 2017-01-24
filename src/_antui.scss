@@ -1,0 +1,48 @@
+//BASE SETTINGS
+$font-size: .8rem!default;
+
+//COLOR SETTINGS
+$base-color: #fff!default;
+$accent-color: #09f!default;
+$success-color: #00e25e!default;
+$warning-color: #fbc02d!default;
+$danger-color: #e33!default;
+
+//BUTTON SETTINGS
+$button-padding: .5rem!default;
+$button-border-radius: .125rem!default;
+
+//TOGGLE SETTINGS
+$toggle-size: 2rem!default;
+$active-color: #efeff4 !default;
+$checked-color: $success-color !default;
+
+//TEXTBOX SETTINGS
+$textbox-padding: .5rem !default;
+$textbox-label-padding: $textbox-padding !default;
+$textbox-font-size: $font-size !default;
+$text-color: #000!default;
+$placeholder-color: #999!default;
+
+//CHECKBOX/RADIO SETTINGS
+$checkbox-font-size: $font-size !default;
+$checkbox-active-color: $accent-color!default;
+
+//NUMBER INPUT
+$number-font-size: $font-size!default;
+$number-padding: $number-font-size * .5!default;
+
+//SPINNER LOADER
+$loader-size: 5rem;
+$loader-base: lighten($accent-color,15%);
+$loader-dash-size: 4rem;
+$loader-dash-color: white;
+$loader-duration: 1.75s;
+$loaded-duration: .56s;
+$loaded-color: $success-color;
+$tick-size: 2.5rem;
+
+//BACKDROP (IN LOADER)
+$backdrop-color: #000;
+
+//TRANSITION/ANIMATION LENGTHS
