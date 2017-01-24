@@ -3,6 +3,10 @@ logs
 *.log
 npm-debug.log*
 
+#deploy stuff
+deploy.sh
+temp
+
 # Runtime data
 pids
 *.pid

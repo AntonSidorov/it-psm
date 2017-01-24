@@ -18,7 +18,8 @@ rm -rf dist
 echo 'Commiting changes to master'
 sleep 5
 
-git commit -a -m 'Automatic master deploy to github'
+git add -A
+git commit -am 'Automatic master deploy to github'
 echo 'Checkout to gh-pages'
 sleep 5
 
