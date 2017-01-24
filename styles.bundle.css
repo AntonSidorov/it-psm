@@ -1,3 +1,806 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font: normal normal 400 1rem/1 -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; }
+
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+figure,
+ol,
+ul {
+  margin: 0;
+  padding: 0; }
+
+main, li {
+  display: block; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit; }
+
+strong {
+  font-weight: bold; }
+
+a, button {
+  color: inherit;
+  -webkit-transition: .3s;
+  transition: .3s; }
+
+a {
+  text-decoration: none; }
+
+button {
+  overflow: visible;
+  border: 0;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  background: none;
+  cursor: pointer; }
+
+::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+:focus {
+  outline: 0; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0; }
+
+@-webkit-keyframes box-anim {
+  0% {
+    opacity: .5;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 12rem; }
+  62.5% {
+    opacity: 0; }
+  100% {
+    width: 1px;
+    height: 1px;
+    opacity: 0; } }
+
+@keyframes box-anim {
+  0% {
+    opacity: .5;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 12rem; }
+  62.5% {
+    opacity: 0; }
+  100% {
+    width: 1px;
+    height: 1px;
+    opacity: 0; } }
+
+@-webkit-keyframes box-anim2 {
+  0% {
+    width: 1px;
+    height: 1px;
+    border-radius: 12rem;
+    opacity: 1; }
+  50% {
+    opacity: .8; }
+  90% {
+    width: 2.4rem;
+    height: 2.4rem;
+    opacity: 0; }
+  100% {
+    opacity: 0; } }
+
+@keyframes box-anim2 {
+  0% {
+    width: 1px;
+    height: 1px;
+    border-radius: 12rem;
+    opacity: 1; }
+  50% {
+    opacity: .8; }
+  90% {
+    width: 2.4rem;
+    height: 2.4rem;
+    opacity: 0; }
+  100% {
+    opacity: 0; } }
+
+@-webkit-keyframes loader-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes loader-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@-webkit-keyframes loader-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0; }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px; }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px; } }
+
+@keyframes loader-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0; }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px; }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px; } }
+
+@-webkit-keyframes loader-flash {
+  90% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    width: 9.25rem;
+    height: 9.25rem; } }
+
+@keyframes loader-flash {
+  90% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    width: 9.25rem;
+    height: 9.25rem; } }
+
+@-webkit-keyframes tick-dash {
+  from {
+    stroke-dashoffset: 4500; }
+  to {
+    stroke-dashoffset: 0; } }
+
+@keyframes tick-dash {
+  from {
+    stroke-dashoffset: 4500; }
+  to {
+    stroke-dashoffset: 0; } }
+
+@-webkit-keyframes tick-fill {
+  0% {
+    fill: rgba(0, 226, 94, 0); }
+  100% {
+    fill: #fff; } }
+
+@keyframes tick-fill {
+  0% {
+    fill: rgba(0, 226, 94, 0); }
+  100% {
+    fill: #fff; } }
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; } }
+
+@-webkit-keyframes tb-to-right {
+  0% {
+    left: 0;
+    width: 1px; }
+  100% {
+    left: 0;
+    width: 100%; } }
+
+@keyframes tb-to-right {
+  0% {
+    left: 0;
+    width: 1px; }
+  100% {
+    left: 0;
+    width: 100%; } }
+
+.au-fade {
+  -webkit-animation: fadeIn .28s ease-in-out;
+          animation: fadeIn .28s ease-in-out; }
+
+.tb-to-right .tb-container .validation:after {
+  -webkit-animation: tb-to-right .28s ease-in-out;
+          animation: tb-to-right .28s ease-in-out; }
+
+.au-cb {
+  font-size: 0.8rem;
+  padding: 1rem 0; }
+  .au-cb > .au-cb-input,
+  .au-cb ~ .au-cb-input,
+  .au-cb-input ~ .au-cb {
+    border: 0;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    line-height: inherit;
+    border: 1px solid rgba(51, 51, 51, 0.25);
+    border-radius: 0.2rem;
+    -webkit-appearance: initial;
+    position: relative;
+    -webkit-transition: background .28s ease-in-out .07s;
+    transition: background .28s ease-in-out .07s; }
+    .au-cb > .au-cb-input:checked:before,
+    .au-cb ~ .au-cb-input:checked:before,
+    .au-cb-input ~ .au-cb:checked:before {
+      color: white;
+      content: "\F00C";
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      position: absolute;
+      font: normal normal normal 0.64rem FontAwesome; }
+    .au-cb > .au-cb-input:focus,
+    .au-cb ~ .au-cb-input:focus,
+    .au-cb-input ~ .au-cb:focus {
+      outline: none !important; }
+    .au-cb > .au-cb-input:after,
+    .au-cb ~ .au-cb-input:after,
+    .au-cb-input ~ .au-cb:after {
+      content: '';
+      display: block;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      position: absolute;
+      background: #09f;
+      -webkit-animation: box-anim .56s ease-in-out;
+              animation: box-anim .56s ease-in-out; }
+    .au-cb > .au-cb-input:checked,
+    .au-cb ~ .au-cb-input:checked,
+    .au-cb-input ~ .au-cb:checked {
+      background: #09f;
+      -webkit-transition: background .28s ease-in-out .28s;
+      transition: background .28s ease-in-out .28s; }
+      .au-cb > .au-cb-input:checked:after,
+      .au-cb ~ .au-cb-input:checked:after,
+      .au-cb-input ~ .au-cb:checked:after {
+        -webkit-animation: box-anim2 .35s ease-in-out;
+                animation: box-anim2 .35s ease-in-out; }
+
+.au-radio {
+  font-size: 0.8rem;
+  padding: 1rem 0; }
+  .au-radio > .au-radio-input {
+    border: 0;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    line-height: inherit;
+    border: 1px solid rgba(51, 51, 51, 0.25);
+    border-radius: 0.8rem;
+    -webkit-appearance: initial;
+    position: relative;
+    -webkit-transition: background .28s ease-in-out .07s;
+    transition: background .28s ease-in-out .07s; }
+    .au-radio > .au-radio-input:checked:before {
+      content: '';
+      background: white;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 0.8rem;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      position: absolute;
+      font: normal normal normal 0.64rem FontAwesome; }
+    .au-radio > .au-radio-input:focus {
+      outline: none !important; }
+    .au-radio > .au-radio-input:after {
+      content: '';
+      display: block;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      position: absolute;
+      background: #09f;
+      -webkit-animation: box-anim .28s ease-in-out;
+              animation: box-anim .28s ease-in-out;
+      -webkit-transition: background .28s ease-in-out .28s;
+      transition: background .28s ease-in-out .28s; }
+    .au-radio > .au-radio-input:checked {
+      background: #09f; }
+      .au-radio > .au-radio-input:checked:after {
+        -webkit-animation: box-anim2 .35s ease-in-out;
+                animation: box-anim2 .35s ease-in-out; }
+
+.auios-label {
+  display: inline-block; }
+
+.auios-toggle {
+  width: 3.42857rem;
+  height: 2rem;
+  border-radius: 2rem;
+  -webkit-appearance: initial;
+  position: relative;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 0 #efeff4;
+  line-height: 2.375rem;
+  vertical-align: middle;
+  border: 0.1rem solid #efeff4;
+  -webkit-transition: box-shadow .28s ease-in-out, border-color .28s ease-in-out;
+  transition: box-shadow .28s ease-in-out, border-color .28s ease-in-out; }
+  .auios-toggle:before {
+    content: "";
+    position: absolute;
+    right: 45%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border: 0.025rem solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0.375rem 0.625rem 0px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    display: block;
+    border-radius: 1rem;
+    background-clip: padding-box;
+    z-index: 2;
+    -webkit-transition: left .3s ease-in-out, right .3s ease-in-out;
+    transition: left .3s ease-in-out, right .3s ease-in-out; }
+  .auios-toggle:active {
+    box-shadow: inset 0 0 0 1rem #efeff4; }
+    .auios-toggle:active:before {
+      right: 35%; }
+    .auios-toggle:active:checked:before {
+      left: 35%; }
+  .auios-toggle:focus {
+    outline: none !important; }
+  .auios-toggle:checked {
+    box-shadow: inset 0 0 0 1rem #00e25e;
+    border-color: #00e25e; }
+    .auios-toggle:checked:before {
+      left: 45%;
+      right: 0; }
+
+.au-btn {
+  cursor: pointer;
+  -webkit-appearance: initial;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  display: inline-block;
+  line-height: 1.2rem;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.125rem;
+  font-size: 0.8rem;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.14), 0 0.375rem 0.125rem -0.3125rem rgba(0, 0, 0, 0.2), 0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.12);
+  -webkit-transition: all .28s ease-in-out;
+  transition: all .28s ease-in-out; }
+  .au-btn:hover {
+    background-color: #f0f0f0; }
+  .au-btn:active {
+    background-color: #f7f7f7;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.07), 0 0.375rem 0.125rem -0.3125rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.06);
+    -webkit-transition: all .05s ease-in-out;
+    transition: all .05s ease-in-out; }
+  .au-btn:focus {
+    outline: none; }
+
+.au-outline.au-btn {
+  box-shadow: none;
+  border: 1px solid #cccccc; }
+  .au-outline.au-btn:active {
+    background-color: #e8e8e8; }
+
+.au-link.au-btn {
+  border: none !important;
+  box-shadow: none;
+  background: transparent !important; }
+
+.au-success.au-btn:not(.au-outline):not(.au-link) {
+  background: #00e25e;
+  color: #fff;
+  border: 1px solid #00c351; }
+  .au-success.au-btn:not(.au-outline):not(.au-link):hover {
+    background-color: #00c953;
+    color: #f2f2f2; }
+  .au-success.au-btn:not(.au-outline):not(.au-link):active {
+    background-color: #02ff6b;
+    border-color: #02ff6b;
+    color: white; }
+
+.au-success.au-btn.au-outline {
+  color: #00c953;
+  border: 1px solid #00e25e; }
+  .au-success.au-btn.au-outline.au-fill:hover {
+    color: #fff;
+    background-color: #00e25e; }
+  .au-success.au-btn.au-outline.au-fill:active {
+    background-color: #49ff95; }
+
+.au-success.au-link {
+  color: #00e25e; }
+
+.au-danger.au-btn:not(.au-outline):not(.au-link) {
+  background: #e33;
+  color: #fff;
+  border: 1px solid #ec1717; }
+  .au-danger.au-btn:not(.au-outline):not(.au-link):hover {
+    background-color: #d21212;
+    color: #e0e0e0; }
+  .au-danger.au-btn:not(.au-outline):not(.au-link):active {
+    background-color: #f04f4f;
+    color: white;
+    border-color: #f04f4f; }
+
+.au-danger.au-btn.au-outline {
+  color: #ec1b1b;
+  border: 1px solid #e33; }
+  .au-danger.au-btn.au-outline.au-fill:hover {
+    color: #fff;
+    background-color: #e33; }
+  .au-danger.au-btn.au-outline.au-fill:active {
+    background-color: #f69191; }
+
+.au-danger.au-link {
+  color: #e33; }
+
+.au-accent.au-btn:not(.au-outline):not(.au-link) {
+  background: #09f;
+  color: #fff;
+  border: 1px solid #0087e0; }
+  .au-accent.au-btn:not(.au-outline):not(.au-link):hover {
+    background-color: #008ae6;
+    color: #f2f2f2; }
+  .au-accent.au-btn:not(.au-outline):not(.au-link):active {
+    background-color: #1fa5ff;
+    color: white; }
+
+.au-accent.au-btn.au-outline {
+  color: #008ae6;
+  border: 1px solid #09f; }
+  .au-accent.au-btn.au-outline.au-fill:hover {
+    color: #fff;
+    background-color: #09f; }
+  .au-accent.au-btn.au-outline.au-fill:active {
+    background-color: #66c2ff; }
+
+.au-accent.au-link {
+  color: #09f; }
+
+.tb-container {
+  position: relative;
+  margin: 0 1rem;
+  padding: 0.5rem 0; }
+  .no-padding .tb-container {
+    margin: 0;
+    padding: 0; }
+    .no-padding .tb-container .aumd-tb {
+      padding: 0;
+      margin: 0; }
+
+.aumd-tb-label {
+  position: absolute;
+  color: #999;
+  top: 50%;
+  -webkit-transform: translate(0.5rem, -50%);
+          transform: translate(0.5rem, -50%);
+  pointer-events: none;
+  -webkit-transition: all .14s ease-in-out;
+  transition: all .14s ease-in-out; }
+
+input[type="text"].aumd-tb,
+input[type="password"].aumd-tb {
+  color: #000;
+  border: none;
+  border-bottom: 1px solid #999;
+  padding: 0.5rem 0.5rem;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  background: inherit; }
+  input[type="text"].aumd-tb:focus,
+  input[type="password"].aumd-tb:focus {
+    outline: none; }
+  input[type="text"].aumd-tb.c-fix, input[type="text"].aumd-tb:focus, input[type="text"].aumd-tb:not(:placeholder-shown),
+  input[type="password"].aumd-tb.c-fix,
+  input[type="password"].aumd-tb:focus,
+  input[type="password"].aumd-tb:not(:placeholder-shown) {
+    border-color: transparent; }
+    input[type="text"].aumd-tb.c-fix ~ label, input[type="text"].aumd-tb:focus ~ label, input[type="text"].aumd-tb:not(:placeholder-shown) ~ label,
+    input[type="password"].aumd-tb.c-fix ~ label,
+    input[type="password"].aumd-tb:focus ~ label,
+    input[type="password"].aumd-tb:not(:placeholder-shown) ~ label {
+      color: #09f;
+      font-size: 0.72rem;
+      top: calc(10% - .5rem);
+      -webkit-transform: translate(0.5rem, 0%);
+              transform: translate(0.5rem, 0%); }
+    input[type="text"].aumd-tb.c-fix ~ span:after, input[type="text"].aumd-tb:focus ~ span:after, input[type="text"].aumd-tb:not(:placeholder-shown) ~ span:after,
+    input[type="password"].aumd-tb.c-fix ~ span:after,
+    input[type="password"].aumd-tb:focus ~ span:after,
+    input[type="password"].aumd-tb:not(:placeholder-shown) ~ span:after {
+      width: 100%;
+      left: 0; }
+  input[type="text"].aumd-tb::-webkit-input-placeholder,
+  input[type="password"].aumd-tb::-webkit-input-placeholder {
+    color: transparent; }
+  input[type="text"].aumd-tb::-moz-placeholder,
+  input[type="password"].aumd-tb::-moz-placeholder {
+    color: transparent; }
+  input[type="text"].aumd-tb:-ms-input-placeholder,
+  input[type="password"].aumd-tb:-ms-input-placeholder {
+    color: transparent; }
+  input[type="text"].aumd-tb.setting-font,
+  input[type="password"].aumd-tb.setting-font {
+    font-size: 0.8rem; }
+  input[type="text"].aumd-tb ~ .validation,
+  input[type="password"].aumd-tb ~ .validation {
+    display: block;
+    color: #999;
+    font-size: 0.72rem;
+    visibility: hidden;
+    max-height: 0;
+    height: 0;
+    -webkit-transition: all .14s ease-in-out;
+    transition: all .14s ease-in-out;
+    margin-left: 0.5rem; }
+    input[type="text"].aumd-tb ~ .validation:after,
+    input[type="password"].aumd-tb ~ .validation:after {
+      -webkit-transition: all .14s ease-in-out;
+      transition: all .14s ease-in-out;
+      left: 50%;
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      visibility: visible;
+      background-color: #09f; }
+  .has-success input[type="text"].aumd-tb, input[type="text"].aumd-tb.form-control-success, .has-success
+  input[type="password"].aumd-tb,
+  input[type="password"].aumd-tb.form-control-success {
+    border-color: transparent; }
+    .has-success input[type="text"].aumd-tb ~ label, input[type="text"].aumd-tb.form-control-success ~ label, .has-success
+    input[type="password"].aumd-tb ~ label,
+    input[type="password"].aumd-tb.form-control-success ~ label {
+      color: #00e25e; }
+    .has-success input[type="text"].aumd-tb ~ .validation, input[type="text"].aumd-tb.form-control-success ~ .validation, .has-success
+    input[type="password"].aumd-tb ~ .validation,
+    input[type="password"].aumd-tb.form-control-success ~ .validation {
+      color: #00e25e; }
+      .has-success input[type="text"].aumd-tb ~ .validation:not(:empty), input[type="text"].aumd-tb.form-control-success ~ .validation:not(:empty), .has-success
+      input[type="password"].aumd-tb ~ .validation:not(:empty),
+      input[type="password"].aumd-tb.form-control-success ~ .validation:not(:empty) {
+        height: 0.8rem;
+        line-height: 0.8rem;
+        max-height: 0.8rem;
+        display: initial;
+        visibility: visible; }
+      .has-success input[type="text"].aumd-tb ~ .validation:after, input[type="text"].aumd-tb.form-control-success ~ .validation:after, .has-success
+      input[type="password"].aumd-tb ~ .validation:after,
+      input[type="password"].aumd-tb.form-control-success ~ .validation:after {
+        background-color: #00e25e;
+        width: 100%;
+        left: 0; }
+  .has-warning input[type="text"].aumd-tb, input[type="text"].aumd-tb.form-control-warning, .has-warning
+  input[type="password"].aumd-tb,
+  input[type="password"].aumd-tb.form-control-warning {
+    border-color: transparent; }
+    .has-warning input[type="text"].aumd-tb ~ label, input[type="text"].aumd-tb.form-control-warning ~ label, .has-warning
+    input[type="password"].aumd-tb ~ label,
+    input[type="password"].aumd-tb.form-control-warning ~ label {
+      color: #fbc02d; }
+    .has-warning input[type="text"].aumd-tb ~ .validation, input[type="text"].aumd-tb.form-control-warning ~ .validation, .has-warning
+    input[type="password"].aumd-tb ~ .validation,
+    input[type="password"].aumd-tb.form-control-warning ~ .validation {
+      color: #fbc02d; }
+      .has-warning input[type="text"].aumd-tb ~ .validation:not(:empty), input[type="text"].aumd-tb.form-control-warning ~ .validation:not(:empty), .has-warning
+      input[type="password"].aumd-tb ~ .validation:not(:empty),
+      input[type="password"].aumd-tb.form-control-warning ~ .validation:not(:empty) {
+        height: 0.8rem;
+        line-height: 0.8rem;
+        max-height: 0.8rem;
+        display: initial;
+        visibility: visible; }
+      .has-warning input[type="text"].aumd-tb ~ .validation:after, input[type="text"].aumd-tb.form-control-warning ~ .validation:after, .has-warning
+      input[type="password"].aumd-tb ~ .validation:after,
+      input[type="password"].aumd-tb.form-control-warning ~ .validation:after {
+        background-color: #fbc02d;
+        width: 100%;
+        left: 0; }
+  .has-danger input[type="text"].aumd-tb, input[type="text"].aumd-tb.form-control-danger, .has-danger
+  input[type="password"].aumd-tb,
+  input[type="password"].aumd-tb.form-control-danger {
+    border-color: transparent; }
+    .has-danger input[type="text"].aumd-tb ~ label, input[type="text"].aumd-tb.form-control-danger ~ label, .has-danger
+    input[type="password"].aumd-tb ~ label,
+    input[type="password"].aumd-tb.form-control-danger ~ label {
+      color: #e33; }
+    .has-danger input[type="text"].aumd-tb ~ .validation, input[type="text"].aumd-tb.form-control-danger ~ .validation, .has-danger
+    input[type="password"].aumd-tb ~ .validation,
+    input[type="password"].aumd-tb.form-control-danger ~ .validation {
+      color: #e33; }
+      .has-danger input[type="text"].aumd-tb ~ .validation:not(:empty), input[type="text"].aumd-tb.form-control-danger ~ .validation:not(:empty), .has-danger
+      input[type="password"].aumd-tb ~ .validation:not(:empty),
+      input[type="password"].aumd-tb.form-control-danger ~ .validation:not(:empty) {
+        height: 0.8rem;
+        line-height: 0.8rem;
+        max-height: 0.8rem;
+        display: initial;
+        visibility: visible; }
+      .has-danger input[type="text"].aumd-tb ~ .validation:after, input[type="text"].aumd-tb.form-control-danger ~ .validation:after, .has-danger
+      input[type="password"].aumd-tb ~ .validation:after,
+      input[type="password"].aumd-tb.form-control-danger ~ .validation:after {
+        background-color: #e33;
+        width: 100%;
+        left: 0; }
+
+.au-number {
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start; }
+  .au-number-minus, .au-number-plus {
+    box-sizing: border-box;
+    background: #fff;
+    padding: 0.4rem;
+    margin: 0;
+    border: 1px solid #cccccc;
+    display: inline-block;
+    background: #f7f7f7;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer; }
+    .au-number-minus:hover, .au-number-plus:hover {
+      background-color: #f0f0f0; }
+    .au-number-minus:active, .au-number-plus:active {
+      background-color: #e8e8e8; }
+  .au-number-minus, .au-number-plus, .au-number-input {
+    vertical-align: middle;
+    height: 2rem; }
+  .au-number-minus {
+    border-radius: 0.4rem 0 0 0.4rem;
+    border-right: none; }
+  .au-number-plus {
+    border-radius: 0 0.4rem 0.4rem 0;
+    border-left: none; }
+  .au-number-input {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 0.4rem;
+    text-align: center;
+    outline: none;
+    border: 1px solid #ccc;
+    font-size: inherit;
+    width: 3.2rem;
+    -moz-appearance: text-field; }
+    .au-number-input::-webkit-outer-spin-button, .au-number-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
+
+.au-loader {
+  z-index: 2; }
+
+.au-backdrop {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff; }
+
+.au-loader {
+  background: #4db8ff;
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 5rem;
+  position: relative;
+  -webkit-transition: all .28s ease-in-out;
+  transition: all .28s ease-in-out; }
+  .au-loader:not(.au-loaded):before {
+    -webkit-animation: loader-flash 1.75s ease-in-out infinite;
+            animation: loader-flash 1.75s ease-in-out infinite;
+    background: #4db8ff;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 45000rem;
+    opacity: 1;
+    display: block;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+  .au-loader.au-loaded {
+    background-color: #00e25e; }
+
+.au-tick {
+  width: 2.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+  .au-tick-path {
+    stroke-dasharray: 4550;
+    stroke-dashoffset: 4550;
+    -webkit-animation: tick-dash 0.56s linear, tick-fill 0.28s ease-in-out 0.56s;
+            animation: tick-dash 0.56s linear, tick-fill 0.28s ease-in-out 0.56s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    -webkit-transform: rotate(180deg) scaleX(-1) translate(-96px, -12px);
+            transform: rotate(180deg) scaleX(-1) translate(-96px, -12px);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    stroke: #fff; }
+
+.au-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 4rem; }
+  .au-spinner-circle {
+    -webkit-animation: loader-rotate 4.08333s linear infinite;
+            animation: loader-rotate 4.08333s linear infinite; }
+  .au-spinner-path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    -webkit-animation: loader-dash 1.75s ease-in-out infinite;
+            animation: loader-dash 1.75s ease-in-out infinite;
+    stroke-linecap: round;
+    stroke: white; }
+
+/*
+TODO: Create all the animations needed for the form control
+
+2 versions
+    1 - Modal based form
+    2 - Inline based form
+*/
+app-root {
+  display: block; }
+
+app-nav {
+  display: block; }
+
+body {
+  overflow-x: hidden; }
+
+.page {
+  width: 100vw;
+  height: 100vh; }
 
 /*# sourceMappingURL=styles.bundle.map*/
