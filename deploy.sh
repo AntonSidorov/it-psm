@@ -42,16 +42,20 @@ sleep 5
 git add -a
 
 git commit -am 'Automatic gh-pages deploy to github'
-echo 'git pull'
+echo 'Syncing the git repositry'
 sleep 5
 
 git pull
-echo 'git push'
+echo 'Uploading changes to git'
 sleep 5
 
 git push
-echo 'git checkout to master'
-sleep 5
+sleep 10
 
 git checkout master
+echo 'Finished with the gh-pages branch. Syncing the repositry now.'
+git pull 
+sleep 10
+git push
+sleep 10
 echo 'Finished!'
