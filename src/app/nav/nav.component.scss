@@ -1,0 +1,100 @@
+@import '../../_settings.scss';
+$circle: 5rem;
+@for $i from 1 through length($names) {
+    .nav.#{nth($names, $i)} {
+        background-color: nth($colors, $i);
+        $closed-x: nth(nth($coords, $i), 1);
+        $closed-y: nth(nth($coords, $i), 2);
+        top: $closed-y * .5rem;
+        left: $closed-x * .5rem;
+        .landing & {
+            top: $closed-y * 1rem;
+            left: $closed-x * 1rem;
+        }
+        .landing.open & {
+            $open-x: nth(nth($landing-coords, $i), 1);
+            $open-y: nth(nth($landing-coords, $i), 2);
+            left: $open-x * 1rem;
+            top: $open-y * 1rem;
+        }
+        $open-x: nth(nth($open-coords, $i), 1);
+        $open-y: nth(nth($open-coords, $i), 2);
+        .open & {
+            left: $open-x * 1rem;
+            top: $open-y * 1rem;
+        }
+    }
+}
+
+.nav {
+    mix-blend-mode: multiply;
+    width: $circle;
+    height: $circle;
+    border-radius: $circle;
+    z-index: 1;
+    transition: all ease-in-out $length, top $curve $length, left $curve $length, color ease-in-out $length/3;
+    .nav-text {
+        position: absolute;
+        color: inherit;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: $circle * .15;
+    }
+    &:not(.bg) {
+        position: absolute;
+        color: black;
+        .nav-text {
+            opacity: 0;
+            transition: opacity $length ease-in-out;
+            .open & {
+                opacity: 1;
+            }
+        }
+    }
+    &.bg {
+        position: relative;
+        margin-left: 1rem;
+        color: white;
+        .open & {
+            border: .3125rem solid #eee;
+            color: black;
+        }
+        & > .nav-text {
+            font-size: $circle * .25;
+        }
+    }
+    &-container {
+        transition: all .86s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        &.landing {
+            transform: translate(-50%, -50%);
+            left: 50%;
+        }
+    }
+}
+
+.landing {
+    .nav {
+        width: $circle * 2;
+        height: $circle * 2;
+        border-radius: $circle * 2;
+        &.bg {
+            margin-left: 0;
+            &>.nav-text {
+                font-size: $circle/2;
+            }
+        }
+        .nav-text {
+            font-size: $circle * .3;
+        }
+    }
+}
+
+.nav-text {
+    font-size: 1rem;
+    z-index: 2;
+}

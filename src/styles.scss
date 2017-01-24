@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '_settings.scss';
+@import '../node_modules/ng-antui/dist/src/scss/antui.scss';
+app-root {
+    display: block;
+}
+
+app-nav {
+    display: block;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    //If we need unique styles
+    &.landing {}
+    &.analysis {}
+    &.design {}
+    &.development {}
+    &.evaluation {}
+}
