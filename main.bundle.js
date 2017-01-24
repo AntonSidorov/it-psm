@@ -24,15 +24,16 @@ var NavComponent = (function () {
         setTimeout(function () {
             _this.open = true;
         }, 1260);
-        setTimeout(function () {
-            _this.landing = false;
-            _this.open = false;
-        }, 10000);
-        setTimeout(function () {
-            _this.open = true;
-        }, 15000);
     }
     NavComponent.prototype.ngOnInit = function () {
+    };
+    NavComponent.prototype.toggleLanding = function () {
+        if (!this.open)
+            return;
+        this.landing = false;
+    };
+    NavComponent.prototype.toggleOpen = function () {
+        this.open = !this.open;
     };
     NavComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Component */])({
@@ -988,6 +989,11 @@ var View_NavComponent0 = (function (_super) {
         this._text_30 = this.renderer.createText(this._el_2, '\n  ', null);
         this._text_31 = this.renderer.createText(this._el_0, '\n', null);
         this._text_32 = this.renderer.createText(parentRenderNode, '\n', null);
+        var disposable_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_0, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'click', null), this.eventHandler(this.handleEvent_0));
+        var disposable_1 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_7, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'click', null), this.eventHandler(this.handleEvent_7));
+        var disposable_2 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_13, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'click', null), this.eventHandler(this.handleEvent_13));
+        var disposable_3 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_19, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'click', null), this.eventHandler(this.handleEvent_19));
+        var disposable_4 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_25, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'click', null), this.eventHandler(this.handleEvent_25));
         this.init(null, (this.renderer.directRenderer ? null : [
             this._el_0,
             this._text_1,
@@ -1022,7 +1028,13 @@ var View_NavComponent0 = (function (_super) {
             this._text_30,
             this._text_31,
             this._text_32
-        ]), null);
+        ]), [
+            disposable_0,
+            disposable_1,
+            disposable_2,
+            disposable_3,
+            disposable_4
+        ]);
         return null;
     };
     View_NavComponent0.prototype.detectChangesInternal = function (throwOnChange) {
@@ -1036,6 +1048,51 @@ var View_NavComponent0 = (function (_super) {
             this.renderer.setElementClass(this._el_0, 'open', currVal_34);
             this._expr_34 = currVal_34;
         }
+    };
+    View_NavComponent0.prototype.handleEvent_0 = function (eventName, $event) {
+        this.markPathToRootAsCheckOnce();
+        var result = true;
+        if ((eventName == 'click')) {
+            var pd_sub_0 = (this.context.toggleOpen() !== false);
+            result = (pd_sub_0 && result);
+        }
+        return result;
+    };
+    View_NavComponent0.prototype.handleEvent_7 = function (eventName, $event) {
+        this.markPathToRootAsCheckOnce();
+        var result = true;
+        if ((eventName == 'click')) {
+            var pd_sub_0 = (this.context.toggleLanding() !== false);
+            result = (pd_sub_0 && result);
+        }
+        return result;
+    };
+    View_NavComponent0.prototype.handleEvent_13 = function (eventName, $event) {
+        this.markPathToRootAsCheckOnce();
+        var result = true;
+        if ((eventName == 'click')) {
+            var pd_sub_0 = (this.context.toggleLanding() !== false);
+            result = (pd_sub_0 && result);
+        }
+        return result;
+    };
+    View_NavComponent0.prototype.handleEvent_19 = function (eventName, $event) {
+        this.markPathToRootAsCheckOnce();
+        var result = true;
+        if ((eventName == 'click')) {
+            var pd_sub_0 = (this.context.toggleLanding() !== false);
+            result = (pd_sub_0 && result);
+        }
+        return result;
+    };
+    View_NavComponent0.prototype.handleEvent_25 = function (eventName, $event) {
+        this.markPathToRootAsCheckOnce();
+        var result = true;
+        if ((eventName == 'click')) {
+            var pd_sub_0 = (this.context.toggleLanding() !== false);
+            result = (pd_sub_0 && result);
+        }
+        return result;
     };
     return View_NavComponent0;
 }(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
