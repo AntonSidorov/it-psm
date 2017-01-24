@@ -1,0 +1,10 @@
+{
+  "typescript.check.workspaceVersion": false,
+  "files.exclude": {
+      "**/e2e":true,
+      "node_modules": true,
+      ".gitignore":true,
+      "**/typings.d.ts":true,
+      "":true
+  }
+}
