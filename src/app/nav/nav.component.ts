@@ -13,16 +13,16 @@ export class NavComponent implements OnInit {
     setTimeout(() => {
       this.open = true;
     }, 1260);
-    setTimeout(()=>{
-      this.landing = false;
-      this.open = false;
-    }, 10000);
-    setTimeout(()=>{
-      this.open = true;
-    }, 15000);
   }
 
   ngOnInit() {
   }
 
+  toggleLanding() {
+    if (!this.open) return;
+    this.landing = false;    
+  }
+  toggleOpen() {
+    this.open = !this.open;
+  }
 }
