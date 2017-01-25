@@ -24,3 +24,62 @@ body {
     &.development {}
     &.evaluation {}
 }
+
+@for $i from 1 through length($names) {
+    &##{nth($names,$i)} nav,
+    nav##{nth($names, $i)} {
+        background-color: nth($colors, $i);
+    }
+}
+
+nav {
+    width: 100vw;
+    height: 4rem;
+    color: white;
+    z-index: 1;
+    font-size: 0;
+    p {
+        display: inline-block;
+        height: 4rem;
+        vertical-align: middle;
+        line-height: 4rem;
+        margin-left: 5vmin;
+        font-size: 1.75rem;
+        color: inherit;
+    }
+    .fixed & {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .page & {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.page {
+    position: relative;
+    padding-top: 4rem;
+}
+
+//alternative page style:
+
+/*
+#landing{
+    height: 100vh;
+}
+.page:after{
+    content: '';
+    display:block;
+    height: 10rem;
+}
+*/
+
+ul>li {
+    display: list-item;
+    text-transform: capitalize;
+    margin: 1rem;
+    margin-left: 3rem;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -9,6 +9,9 @@ export class NavComponent implements OnInit {
 
   public open: boolean = false;
   public landing: boolean = true;
+
+  @Output() onclick: EventEmitter<number> = new EventEmitter();
+
   constructor() {
     this.autoOpen();
   }
@@ -25,12 +28,19 @@ export class NavComponent implements OnInit {
   }
   public close() {
     this.landing = false;
-    this.open = false;
   }
   public autoOpen() {
     this.landing = true;
     setTimeout(() => {
       this.open = true;
     }, 840);
+  }
+
+  navTo(i: number, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(i);
+    console.log(event);
+    this.onclick.emit(i);
   }
 }

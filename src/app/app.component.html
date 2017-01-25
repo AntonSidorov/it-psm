@@ -1,16 +1,130 @@
 <!--Make the class toggleable through angular-->
-<app-nav></app-nav>
+<app-nav (onclick)="onnav($event)"></app-nav>
+<div class="fixed">
+  <nav *ngIf="navVis[0]" id="analysis">
+    <p *ngFor="let p of navs[0]">{{p}}</p>
+  </nav>
+  <nav *ngIf="navVis[1]" id="design">
+    <p *ngFor="let p of navs[1]">{{p}}</p>
+  </nav>
+  <nav *ngIf="navVis[2]" id="development">
+    <p *ngFor="let p of navs[2]">{{p}}</p>
+  </nav>
+  <nav *ngIf="navVis[3]" id="evaluation">
+    <p *ngFor="let p of navs[3]">{{p}}</p>
+  </nav>
+</div>
 <section class="page" id="landing" #landing>
 </section>
 <section class="page" id="analysis" #analysis>
-    <nav></nav>
+  <nav *ngIf="!navVis[0]">
+    <p>Analysis:</p>
+    <p>Solution requirements</p>
+    <p>Solution constraints</p>
+    <p>Scope of solution</p>
+  </nav>
+  <div class="description">
+    <h1>Determining the solution requirements</h1>
+    <p>What output is the solution to provide? What data is needed to produce the output? What functions must the solution provide?
+      <br/><br/> These requirements can be classified as being functional, that is, what the solution is required to do,
+      and non-functional, which describes the attributes the solution should possess including useability, reliability, portability,
+      robustness, maintainability.
+      <br/><br/> Tools to assist in determining the solution requirements include context diagrams, data flow diagrams and
+      use cases.
+    </p>
+    <h1>Identifying the constraints on the solution</h1>
+    <p>
+      What conditions need to be considered when designing a solution? Typical constraints include economic, such as cost and time;
+      technical, such as speed of processing, capacity, availability of equipment, compatibility and security; social, such
+      as level of expertise of users; legal, such as ownership and privacy of data requirements; and useability, such as
+      usefulness and ease of use of solutions.
+    </p>
+    <h1>Determining the scope of the solution</h1>
+    <p>Determining the scope of the solution. The scope states the boundaries or parameters of the solution. It identifies the
+      area of interest or what aspects of the problem will and will not be addressed by the solution.
+    </p>
+  </div>
 </section>
 <section class="page" id="design" #design>
-    <nav></nav>
+  <nav *ngIf="!navVis[1]">
+    <p>Design:</p>
+    <p>Solution design</p>
+    <p>Evaluation criteria</p>
+  </nav>
+  <div class="description">
+    <h1>Planning how the solution will function and its appearance.</h1>
+    <p>The solution design typically involves identifying what specific data is required and how the data will be named, structured,
+      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,
+      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where
+      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,
+      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships
+      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,
+      and context diagrams.
+      <br/> <br/>Planning the solution also involves determining its appearance, including, where appropriate, the user interface.
+      This typically involves identifying the position and size of text, images and graphics, font types, colours and text
+      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.
+    </p>
+    <h1>Determining the evaluation criteria.</h1>
+    <p>
+      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from
+      the solution requirements identified in the analysis stage.
+    </p>
+  </div>
 </section>
 <section class="page" id="development" #development>
-    <nav></nav>
+  <nav *ngIf="!navVis[2]">
+    <p>Development:</p>
+    <p>Manipulation</p>
+    <p>Validation</p>
+    <p>Testing</p>
+    <p>Documentation</p>
+  </nav>
+  <div class="description">
+    <h1>Electronically ‘building’ or creating the solution following initial designs.</h1>
+    <p>It may, however, warrant modifying initial designs in order to create a working solution.</p>
+    <h1>Validation to check for the reasonableness of data being input.</h1>
+    <p>
+      Validation can be both manual and electronic. Proofreading is a manual technique and it occurs when a human scans the data
+      for errors. Electronic validation occurs when the validation process is built into the solution. Its effectiveness
+      is determined through the testing activity.
+    </p>
+    <h1>Testing whether the solution does what it was intended to do. This activity typically involves:</h1>
+    <ul>
+      <li>establishing what tests will be conducted</li>
+      <li>determining what test data will be used</li>
+      <li>determining expected results</li>
+      <li>conducting the test</li>
+      <li>recording the actual results</li>
+      <li>correcting any identified errors</li>
+    </ul>
+    <h1>Writing internal and user documentation, including within the user interface, to support the functioning and use of the
+      solution.
+    </h1>
+  </div>
 </section>
 <section class="page" id="evaluation" #evaluation>
-    <nav></nav>
+  <nav *ngIf="!navVis[3]">
+    <p>Evaluation:</p>
+    <p>Strategy</p>
+    <p>Report</p>
+  </nav>
+  <div class="description">
+    <h1>Planning how the solution will function and its appearance.</h1>
+    <p>The solution design typically involves identifying what specific data is required and how the data will be named, structured,
+      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,
+      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where
+      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,
+      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships
+      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,
+      and context diagrams.
+      <br/> <br/>Planning the solution also involves determining its appearance, including, where appropriate, the user interface.
+      This typically involves identifying the position and size of text, images and graphics, font types, colours and text
+      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.
+    </p>
+    <h1>Determining the evaluation criteria.</h1>
+    <p>
+      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from
+      the solution requirements identified in the analysis stage.
+    </p>
+  </div>
 </section>

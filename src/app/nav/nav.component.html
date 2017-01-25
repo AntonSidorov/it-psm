@@ -1,16 +1,16 @@
 <div class="nav-container" [class.landing]="landing" [class.open]="open" (click)="toggleOpen()">
   <div class="nav bg">
     <p class="nav-text">PSM</p>
-    <div class="nav analysis" (click)="toggleLanding()">
+    <div class="nav analysis" (click)="navTo(0, $event)">
       <p class="nav-text">Analysis</p>
     </div>
-    <div class="nav design" (click)="toggleLanding()">
+    <div class="nav design" (click)="navTo(1, $event)">
       <p class="nav-text">Design</p>
     </div>
-    <div class="nav development" (click)="toggleLanding()">
+    <div class="nav development" (click)="navTo(2, $event)">
       <p class="nav-text">Development</p>
     </div>
-    <div class="nav evaluation" (click)="toggleLanding()">
+    <div class="nav evaluation" (click)="navTo(3, $event)">
       <p class="nav-text">Evaluation</p>
     </div>
   </div>
