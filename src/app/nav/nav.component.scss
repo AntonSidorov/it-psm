@@ -40,6 +40,7 @@ $circle: 5rem;
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: $circle * .15;
+        transition: font-size ease-in-out $length;
     }
     &:not(.bg) {
         position: absolute;
@@ -66,13 +67,14 @@ $circle: 5rem;
     }
     &-container {
         transition: all .86s ease-in-out;
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 0;
         transform: translate(0, -50%);
         &.landing {
             transform: translate(-50%, -50%);
             left: 50%;
+            position: absolute;
         }
     }
 }

@@ -7,22 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  open: boolean = false;
-  landing: boolean = true;
+  public open: boolean = false;
+  public landing: boolean = true;
   constructor() {
-    setTimeout(() => {
-      this.open = true;
-    }, 1260);
+    this.autoOpen();
   }
 
   ngOnInit() {
   }
 
-  toggleLanding() {
+  public toggleLanding() {
     if (!this.open) return;
-    this.landing = false;    
+    this.landing = false;
   }
-  toggleOpen() {
+  public toggleOpen() {
     this.open = !this.open;
+  }
+  public close() {
+    this.landing = false;
+    this.open = false;
+  }
+  public autoOpen() {
+    this.landing = true;
+    setTimeout(() => {
+      this.open = true;
+    }, 840);
   }
 }
