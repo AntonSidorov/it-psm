@@ -27,6 +27,9 @@ export class NavComponent implements OnInit {
     this.open = !this.open;
   }
   public close() {
+    this.open = false;
+  }
+  public minimise(){
     this.landing = false;
   }
   public autoOpen() {
@@ -37,6 +40,7 @@ export class NavComponent implements OnInit {
   }
 
   navTo(i: number, event) {
+    if (!this.open) return false;
     event.preventDefault();
     event.stopPropagation();
     console.log(i);

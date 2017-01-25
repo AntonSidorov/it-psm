@@ -48,7 +48,7 @@ $circle: 5rem;
         color: black;
         .nav-text {
             opacity: 0;
-            transition: opacity $length ease-in-out;
+            transition: opacity $length ease-in-out, font-size $length ease-in-out;
             .open & {
                 opacity: 1;
             }

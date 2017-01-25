@@ -16,6 +16,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(NavComponent) nav;
 
   onLanding = true;
+  setup = false;
 
   navVis = [false, false, false, false];
   pages = ["#analysis", "#design", "#development", "#evaluation"];
@@ -36,11 +37,14 @@ export class AppComponent implements AfterViewInit {
   title = 'app works!';
 
   ngAfterViewInit() {
-    this.updateRects();
+    this.setup = true;
+    setTimeout(() => {
+      this.updateRects();
+    }, 100);
   }
 
   updateRects() {
-    this.rects[0]= this.landing.nativeElement.getBoundingClientRect();
+    this.rects[0] = this.landing.nativeElement.getBoundingClientRect();
     this.rects[1] = this.analysis.nativeElement.getBoundingClientRect();
     this.rects[2] = this.design.nativeElement.getBoundingClientRect();
     this.rects[3] = this.development.nativeElement.getBoundingClientRect();
@@ -52,10 +56,10 @@ export class AppComponent implements AfterViewInit {
     //Now all we have to do is just check which element is focused the most out of those
     this.updateRects();
     if (this.rects[0].top < 0) {
+      this.nav.minimise();
       this.nav.close();
       if (this.onLanding) {
         this.onLanding = false;
-        this.nav.open = false;
       }
     }
     else {
@@ -68,12 +72,6 @@ export class AppComponent implements AfterViewInit {
     this.navVis[1] = this.rects[2].top <= 0 && this.rects[2].bottom >= 0;
     this.navVis[2] = this.rects[3].top <= 0 && this.rects[3].bottom >= 0;
     this.navVis[3] = this.rects[4].top <= 0 && this.rects[4].bottom >= 0;
-    console.log("----------------");
-    console.log(this.rects[0]);
-    console.log(this.rects[1]);
-    console.log(this.rects[2]);
-    console.log(this.rects[3]);
-    console.log(this.rects[4]);
   }
 
   onnav(event) {

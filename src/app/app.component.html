@@ -16,7 +16,7 @@
 </div>
 <section class="page" id="landing" #landing>
 </section>
-<section class="page" id="analysis" #analysis>
+<section class="page" id="analysis" #analysis *ngIf="setup">
   <nav *ngIf="!navVis[0]">
     <p>Analysis:</p>
     <p>Solution requirements</p>
@@ -45,7 +45,7 @@
     </p>
   </div>
 </section>
-<section class="page" id="design" #design>
+<section class="page" id="design" #design *ngIf="setup">
   <nav *ngIf="!navVis[1]">
     <p>Design:</p>
     <p>Solution design</p>
@@ -71,7 +71,7 @@
     </p>
   </div>
 </section>
-<section class="page" id="development" #development>
+<section class="page" id="development" #development *ngIf="setup">
   <nav *ngIf="!navVis[2]">
     <p>Development:</p>
     <p>Manipulation</p>
@@ -102,7 +102,7 @@
     </h1>
   </div>
 </section>
-<section class="page" id="evaluation" #evaluation>
+<section class="page" id="evaluation" #evaluation *ngIf="setup">
   <nav *ngIf="!navVis[3]">
     <p>Evaluation:</p>
     <p>Strategy</p>
