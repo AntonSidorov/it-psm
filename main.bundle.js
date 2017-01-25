@@ -34,6 +34,9 @@ var NavComponent = (function () {
         this.open = !this.open;
     };
     NavComponent.prototype.close = function () {
+        this.open = false;
+    };
+    NavComponent.prototype.minimise = function () {
         this.landing = false;
     };
     NavComponent.prototype.autoOpen = function () {
@@ -44,6 +47,8 @@ var NavComponent = (function () {
         }, 840);
     };
     NavComponent.prototype.navTo = function (i, event) {
+        if (!this.open)
+            return false;
         event.preventDefault();
         event.stopPropagation();
         console.log(i);
@@ -93,6 +98,7 @@ var AppComponent = (function () {
     function AppComponent(titleService) {
         this.titleService = titleService;
         this.onLanding = true;
+        this.setup = false;
         this.navVis = [false, false, false, false];
         this.pages = ["#analysis", "#design", "#development", "#evaluation"];
         this.navs = [
@@ -108,7 +114,11 @@ var AppComponent = (function () {
         //this.nav.
     }
     AppComponent.prototype.ngAfterViewInit = function () {
-        this.updateRects();
+        var _this = this;
+        this.setup = true;
+        setTimeout(function () {
+            _this.updateRects();
+        }, 100);
     };
     AppComponent.prototype.updateRects = function () {
         this.rects[0] = this.landing.nativeElement.getBoundingClientRect();
@@ -121,10 +131,10 @@ var AppComponent = (function () {
         //Now all we have to do is just check which element is focused the most out of those
         this.updateRects();
         if (this.rects[0].top < 0) {
+            this.nav.minimise();
             this.nav.close();
             if (this.onLanding) {
                 this.onLanding = false;
-                this.nav.open = false;
             }
         }
         else {
@@ -135,12 +145,6 @@ var AppComponent = (function () {
         this.navVis[1] = this.rects[2].top <= 0 && this.rects[2].bottom >= 0;
         this.navVis[2] = this.rects[3].top <= 0 && this.rects[3].bottom >= 0;
         this.navVis[3] = this.rects[4].top <= 0 && this.rects[4].bottom >= 0;
-        console.log("----------------");
-        console.log(this.rects[0]);
-        console.log(this.rects[1]);
-        console.log(this.rects[2]);
-        console.log(this.rects[3]);
-        console.log(this.rects[4]);
     };
     AppComponent.prototype.onnav = function (event) {
         this.jump(this.rects[event + 1].top);
@@ -273,12 +277,12 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["d
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_core_src_change_detection_differs_iterable_differs__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_common_src_directives_ng_for__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__app_nav_nav_component__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__nav_nav_component_ngfactory__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_core_src_linker_element_ref__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__app_nav_nav_component__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__nav_nav_component_ngfactory__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_core_src_linker_element_ref__ = __webpack_require__(65);
 /* unused harmony export Wrapper_AppComponent */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppComponentNgFactory; });
 /* unused harmony export View_AppComponent0 */
@@ -697,12 +701,12 @@ var View_AppComponent7 = (function (_super) {
     };
     return View_AppComponent7;
 }(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-var View_AppComponent9 = (function (_super) {
-    __extends(View_AppComponent9, _super);
-    function View_AppComponent9(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
-        _super.call(this, View_AppComponent9, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+var View_AppComponent10 = (function (_super) {
+    __extends(View_AppComponent10, _super);
+    function View_AppComponent10(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent10, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
     }
-    View_AppComponent9.prototype.createInternal = function (rootSelector) {
+    View_AppComponent10.prototype.createInternal = function (rootSelector) {
         this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'nav', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
         this._text_1 = this.renderer.createText(this._el_0, '\n    ', null);
         this._el_2 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
@@ -735,17 +739,124 @@ var View_AppComponent9 = (function (_super) {
         ]), null);
         return null;
     };
+    View_AppComponent10.prototype.visitRootNodesInternal = function (cb, ctx) {
+        cb(this._el_0, ctx);
+    };
+    return View_AppComponent10;
+}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
+var View_AppComponent9 = (function (_super) {
+    __extends(View_AppComponent9, _super);
+    function View_AppComponent9(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent9, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+    }
+    View_AppComponent9.prototype.createInternal = function (rootSelector) {
+        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'analysis'), null);
+        this._text_1 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0, null);
+        this._vc_2 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](2, 0, this, this._anchor_2);
+        this._TemplateRef_2_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 2, this._anchor_2);
+        this._NgIf_2_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_2.vcRef, this._TemplateRef_2_5);
+        this._text_3 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._el_4 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
+        this._text_5 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_6 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_7 = this.renderer.createText(this._el_6, 'Determining the solution requirements', null);
+        this._text_8 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_9 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_10 = this.renderer.createText(this._el_9, 'What output is the solution to provide? What data is needed to produce the output? What functions must the solution provide?\n      ', null);
+        this._el_11 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._el_12 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_13 = this.renderer.createText(this._el_9, ' These requirements can be classified as being functional, that is, what the solution is required to do,\n      and non-functional, which describes the attributes the solution should possess including useability, reliability, portability,\n      robustness, maintainability.\n      ', null);
+        this._el_14 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._el_15 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_16 = this.renderer.createText(this._el_9, ' Tools to assist in determining the solution requirements include context diagrams, data flow diagrams and\n      use cases.\n    ', null);
+        this._text_17 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_18 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_19 = this.renderer.createText(this._el_18, 'Identifying the constraints on the solution', null);
+        this._text_20 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_21 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_22 = this.renderer.createText(this._el_21, '\n      What conditions need to be considered when designing a solution? Typical constraints include economic, such as cost and time;\n      technical, such as speed of processing, capacity, availability of equipment, compatibility and security; social, such\n      as level of expertise of users; legal, such as ownership and privacy of data requirements; and useability, such as\n      usefulness and ease of use of solutions.\n    ', null);
+        this._text_23 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_24 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_25 = this.renderer.createText(this._el_24, 'Determining the scope of the solution', null);
+        this._text_26 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_27 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_28 = this.renderer.createText(this._el_27, 'Determining the scope of the solution. The scope states the boundaries or parameters of the solution. It identifies the\n      area of interest or what aspects of the problem will and will not be addressed by the solution.\n    ', null);
+        this._text_29 = this.renderer.createText(this._el_4, '\n  ', null);
+        this._text_30 = this.renderer.createText(this._el_0, '\n', null);
+        this.init(this._el_0, (this.renderer.directRenderer ? null : [
+            this._el_0,
+            this._text_1,
+            this._anchor_2,
+            this._text_3,
+            this._el_4,
+            this._text_5,
+            this._el_6,
+            this._text_7,
+            this._text_8,
+            this._el_9,
+            this._text_10,
+            this._el_11,
+            this._el_12,
+            this._text_13,
+            this._el_14,
+            this._el_15,
+            this._text_16,
+            this._text_17,
+            this._el_18,
+            this._text_19,
+            this._text_20,
+            this._el_21,
+            this._text_22,
+            this._text_23,
+            this._el_24,
+            this._text_25,
+            this._text_26,
+            this._el_27,
+            this._text_28,
+            this._text_29,
+            this._text_30
+        ]), null);
+        return null;
+    };
+    View_AppComponent9.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (2 === requestNodeIndex))) {
+            return this._TemplateRef_2_5;
+        }
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (2 === requestNodeIndex))) {
+            return this._NgIf_2_6.context;
+        }
+        return notFoundResult;
+    };
+    View_AppComponent9.prototype.detectChangesInternal = function (throwOnChange) {
+        var currVal_2_0_0 = !this.parentView.context.navVis[0];
+        this._NgIf_2_6.check_ngIf(currVal_2_0_0, throwOnChange, false);
+        this._NgIf_2_6.ngDoCheck(this, this._anchor_2, throwOnChange);
+        this._vc_2.detectChangesInNestedViews(throwOnChange);
+    };
+    View_AppComponent9.prototype.dirtyParentQueriesInternal = function () {
+        this.parentView._viewQuery_analysis_1.setDirty();
+    };
+    View_AppComponent9.prototype.destroyInternal = function () {
+        this._vc_2.destroyNestedViews();
+    };
     View_AppComponent9.prototype.visitRootNodesInternal = function (cb, ctx) {
         cb(this._el_0, ctx);
     };
+    View_AppComponent9.prototype.createEmbeddedViewInternal = function (nodeIndex) {
+        if ((nodeIndex == 2)) {
+            return new View_AppComponent10(this.viewUtils, this, 2, this._anchor_2, this._vc_2);
+        }
+        return null;
+    };
     return View_AppComponent9;
 }(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-var View_AppComponent10 = (function (_super) {
-    __extends(View_AppComponent10, _super);
-    function View_AppComponent10(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
-        _super.call(this, View_AppComponent10, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+var View_AppComponent12 = (function (_super) {
+    __extends(View_AppComponent12, _super);
+    function View_AppComponent12(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent12, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
     }
-    View_AppComponent10.prototype.createInternal = function (rootSelector) {
+    View_AppComponent12.prototype.createInternal = function (rootSelector) {
         this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'nav', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
         this._text_1 = this.renderer.createText(this._el_0, '\n    ', null);
         this._el_2 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
@@ -772,10 +883,10 @@ var View_AppComponent10 = (function (_super) {
         ]), null);
         return null;
     };
-    View_AppComponent10.prototype.visitRootNodesInternal = function (cb, ctx) {
+    View_AppComponent12.prototype.visitRootNodesInternal = function (cb, ctx) {
         cb(this._el_0, ctx);
     };
-    return View_AppComponent10;
+    return View_AppComponent12;
 }(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
 var View_AppComponent11 = (function (_super) {
     __extends(View_AppComponent11, _super);
@@ -783,6 +894,97 @@ var View_AppComponent11 = (function (_super) {
         _super.call(this, View_AppComponent11, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
     }
     View_AppComponent11.prototype.createInternal = function (rootSelector) {
+        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'design'), null);
+        this._text_1 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0, null);
+        this._vc_2 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](2, 0, this, this._anchor_2);
+        this._TemplateRef_2_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 2, this._anchor_2);
+        this._NgIf_2_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_2.vcRef, this._TemplateRef_2_5);
+        this._text_3 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._el_4 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
+        this._text_5 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_6 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_7 = this.renderer.createText(this._el_6, 'Planning how the solution will function and its appearance.', null);
+        this._text_8 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_9 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_10 = this.renderer.createText(this._el_9, 'The solution design typically involves identifying what specific data is required and how the data will be named, structured,\n      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,\n      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where\n      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,\n      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships\n      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,\n      and context diagrams.\n      ', null);
+        this._el_11 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_12 = this.renderer.createText(this._el_9, ' ', null);
+        this._el_13 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_14 = this.renderer.createText(this._el_9, 'Planning the solution also involves determining its appearance, including, where appropriate, the user interface.\n      This typically involves identifying the position and size of text, images and graphics, font types, colours and text\n      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.\n    ', null);
+        this._text_15 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_16 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_17 = this.renderer.createText(this._el_16, 'Determining the evaluation criteria.', null);
+        this._text_18 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_19 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_20 = this.renderer.createText(this._el_19, '\n      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from\n      the solution requirements identified in the analysis stage.\n    ', null);
+        this._text_21 = this.renderer.createText(this._el_4, '\n  ', null);
+        this._text_22 = this.renderer.createText(this._el_0, '\n', null);
+        this.init(this._el_0, (this.renderer.directRenderer ? null : [
+            this._el_0,
+            this._text_1,
+            this._anchor_2,
+            this._text_3,
+            this._el_4,
+            this._text_5,
+            this._el_6,
+            this._text_7,
+            this._text_8,
+            this._el_9,
+            this._text_10,
+            this._el_11,
+            this._text_12,
+            this._el_13,
+            this._text_14,
+            this._text_15,
+            this._el_16,
+            this._text_17,
+            this._text_18,
+            this._el_19,
+            this._text_20,
+            this._text_21,
+            this._text_22
+        ]), null);
+        return null;
+    };
+    View_AppComponent11.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (2 === requestNodeIndex))) {
+            return this._TemplateRef_2_5;
+        }
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (2 === requestNodeIndex))) {
+            return this._NgIf_2_6.context;
+        }
+        return notFoundResult;
+    };
+    View_AppComponent11.prototype.detectChangesInternal = function (throwOnChange) {
+        var currVal_2_0_0 = !this.parentView.context.navVis[1];
+        this._NgIf_2_6.check_ngIf(currVal_2_0_0, throwOnChange, false);
+        this._NgIf_2_6.ngDoCheck(this, this._anchor_2, throwOnChange);
+        this._vc_2.detectChangesInNestedViews(throwOnChange);
+    };
+    View_AppComponent11.prototype.dirtyParentQueriesInternal = function () {
+        this.parentView._viewQuery_design_2.setDirty();
+    };
+    View_AppComponent11.prototype.destroyInternal = function () {
+        this._vc_2.destroyNestedViews();
+    };
+    View_AppComponent11.prototype.visitRootNodesInternal = function (cb, ctx) {
+        cb(this._el_0, ctx);
+    };
+    View_AppComponent11.prototype.createEmbeddedViewInternal = function (nodeIndex) {
+        if ((nodeIndex == 2)) {
+            return new View_AppComponent12(this.viewUtils, this, 2, this._anchor_2, this._vc_2);
+        }
+        return null;
+    };
+    return View_AppComponent11;
+}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
+var View_AppComponent14 = (function (_super) {
+    __extends(View_AppComponent14, _super);
+    function View_AppComponent14(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent14, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+    }
+    View_AppComponent14.prototype.createInternal = function (rootSelector) {
         this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'nav', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
         this._text_1 = this.renderer.createText(this._el_0, '\n    ', null);
         this._el_2 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
@@ -821,17 +1023,154 @@ var View_AppComponent11 = (function (_super) {
         ]), null);
         return null;
     };
-    View_AppComponent11.prototype.visitRootNodesInternal = function (cb, ctx) {
+    View_AppComponent14.prototype.visitRootNodesInternal = function (cb, ctx) {
         cb(this._el_0, ctx);
     };
-    return View_AppComponent11;
+    return View_AppComponent14;
 }(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-var View_AppComponent12 = (function (_super) {
-    __extends(View_AppComponent12, _super);
-    function View_AppComponent12(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
-        _super.call(this, View_AppComponent12, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+var View_AppComponent13 = (function (_super) {
+    __extends(View_AppComponent13, _super);
+    function View_AppComponent13(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent13, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
     }
-    View_AppComponent12.prototype.createInternal = function (rootSelector) {
+    View_AppComponent13.prototype.createInternal = function (rootSelector) {
+        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'development'), null);
+        this._text_1 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0, null);
+        this._vc_2 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](2, 0, this, this._anchor_2);
+        this._TemplateRef_2_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 2, this._anchor_2);
+        this._NgIf_2_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_2.vcRef, this._TemplateRef_2_5);
+        this._text_3 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._el_4 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
+        this._text_5 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_6 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_7 = this.renderer.createText(this._el_6, 'Electronically ‘building’ or creating the solution following initial designs.', null);
+        this._text_8 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_9 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_10 = this.renderer.createText(this._el_9, 'It may, however, warrant modifying initial designs in order to create a working solution.', null);
+        this._text_11 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_12 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_13 = this.renderer.createText(this._el_12, 'Validation to check for the reasonableness of data being input.', null);
+        this._text_14 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_15 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_16 = this.renderer.createText(this._el_15, '\n      Validation can be both manual and electronic. Proofreading is a manual technique and it occurs when a human scans the data\n      for errors. Electronic validation occurs when the validation process is built into the solution. Its effectiveness\n      is determined through the testing activity.\n    ', null);
+        this._text_17 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_18 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_19 = this.renderer.createText(this._el_18, 'Testing whether the solution does what it was intended to do. This activity typically involves:', null);
+        this._text_20 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_21 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'ul', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_22 = this.renderer.createText(this._el_21, '\n      ', null);
+        this._el_23 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_24 = this.renderer.createText(this._el_23, 'establishing what tests will be conducted', null);
+        this._text_25 = this.renderer.createText(this._el_21, '\n      ', null);
+        this._el_26 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_27 = this.renderer.createText(this._el_26, 'determining what test data will be used', null);
+        this._text_28 = this.renderer.createText(this._el_21, '\n      ', null);
+        this._el_29 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_30 = this.renderer.createText(this._el_29, 'determining expected results', null);
+        this._text_31 = this.renderer.createText(this._el_21, '\n      ', null);
+        this._el_32 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_33 = this.renderer.createText(this._el_32, 'conducting the test', null);
+        this._text_34 = this.renderer.createText(this._el_21, '\n      ', null);
+        this._el_35 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_36 = this.renderer.createText(this._el_35, 'recording the actual results', null);
+        this._text_37 = this.renderer.createText(this._el_21, '\n      ', null);
+        this._el_38 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_39 = this.renderer.createText(this._el_38, 'correcting any identified errors', null);
+        this._text_40 = this.renderer.createText(this._el_21, '\n    ', null);
+        this._text_41 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_42 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_43 = this.renderer.createText(this._el_42, 'Writing internal and user documentation, including within the user interface, to support the functioning and use of the\n      solution.\n    ', null);
+        this._text_44 = this.renderer.createText(this._el_4, '\n  ', null);
+        this._text_45 = this.renderer.createText(this._el_0, '\n', null);
+        this.init(this._el_0, (this.renderer.directRenderer ? null : [
+            this._el_0,
+            this._text_1,
+            this._anchor_2,
+            this._text_3,
+            this._el_4,
+            this._text_5,
+            this._el_6,
+            this._text_7,
+            this._text_8,
+            this._el_9,
+            this._text_10,
+            this._text_11,
+            this._el_12,
+            this._text_13,
+            this._text_14,
+            this._el_15,
+            this._text_16,
+            this._text_17,
+            this._el_18,
+            this._text_19,
+            this._text_20,
+            this._el_21,
+            this._text_22,
+            this._el_23,
+            this._text_24,
+            this._text_25,
+            this._el_26,
+            this._text_27,
+            this._text_28,
+            this._el_29,
+            this._text_30,
+            this._text_31,
+            this._el_32,
+            this._text_33,
+            this._text_34,
+            this._el_35,
+            this._text_36,
+            this._text_37,
+            this._el_38,
+            this._text_39,
+            this._text_40,
+            this._text_41,
+            this._el_42,
+            this._text_43,
+            this._text_44,
+            this._text_45
+        ]), null);
+        return null;
+    };
+    View_AppComponent13.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (2 === requestNodeIndex))) {
+            return this._TemplateRef_2_5;
+        }
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (2 === requestNodeIndex))) {
+            return this._NgIf_2_6.context;
+        }
+        return notFoundResult;
+    };
+    View_AppComponent13.prototype.detectChangesInternal = function (throwOnChange) {
+        var currVal_2_0_0 = !this.parentView.context.navVis[2];
+        this._NgIf_2_6.check_ngIf(currVal_2_0_0, throwOnChange, false);
+        this._NgIf_2_6.ngDoCheck(this, this._anchor_2, throwOnChange);
+        this._vc_2.detectChangesInNestedViews(throwOnChange);
+    };
+    View_AppComponent13.prototype.dirtyParentQueriesInternal = function () {
+        this.parentView._viewQuery_development_3.setDirty();
+    };
+    View_AppComponent13.prototype.destroyInternal = function () {
+        this._vc_2.destroyNestedViews();
+    };
+    View_AppComponent13.prototype.visitRootNodesInternal = function (cb, ctx) {
+        cb(this._el_0, ctx);
+    };
+    View_AppComponent13.prototype.createEmbeddedViewInternal = function (nodeIndex) {
+        if ((nodeIndex == 2)) {
+            return new View_AppComponent14(this.viewUtils, this, 2, this._anchor_2, this._vc_2);
+        }
+        return null;
+    };
+    return View_AppComponent13;
+}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
+var View_AppComponent16 = (function (_super) {
+    __extends(View_AppComponent16, _super);
+    function View_AppComponent16(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent16, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+    }
+    View_AppComponent16.prototype.createInternal = function (rootSelector) {
         this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'nav', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
         this._text_1 = this.renderer.createText(this._el_0, '\n    ', null);
         this._el_2 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
@@ -858,10 +1197,101 @@ var View_AppComponent12 = (function (_super) {
         ]), null);
         return null;
     };
-    View_AppComponent12.prototype.visitRootNodesInternal = function (cb, ctx) {
+    View_AppComponent16.prototype.visitRootNodesInternal = function (cb, ctx) {
         cb(this._el_0, ctx);
     };
-    return View_AppComponent12;
+    return View_AppComponent16;
+}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
+var View_AppComponent15 = (function (_super) {
+    __extends(View_AppComponent15, _super);
+    function View_AppComponent15(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
+        _super.call(this, View_AppComponent15, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
+    }
+    View_AppComponent15.prototype.createInternal = function (rootSelector) {
+        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'evaluation'), null);
+        this._text_1 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0, null);
+        this._vc_2 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](2, 0, this, this._anchor_2);
+        this._TemplateRef_2_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 2, this._anchor_2);
+        this._NgIf_2_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_2.vcRef, this._TemplateRef_2_5);
+        this._text_3 = this.renderer.createText(this._el_0, '\n  ', null);
+        this._el_4 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
+        this._text_5 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_6 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_7 = this.renderer.createText(this._el_6, 'Planning how the solution will function and its appearance.', null);
+        this._text_8 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_9 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_10 = this.renderer.createText(this._el_9, 'The solution design typically involves identifying what specific data is required and how the data will be named, structured,\n      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,\n      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where\n      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,\n      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships\n      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,\n      and context diagrams.\n      ', null);
+        this._el_11 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_12 = this.renderer.createText(this._el_9, ' ', null);
+        this._el_13 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_14 = this.renderer.createText(this._el_9, 'Planning the solution also involves determining its appearance, including, where appropriate, the user interface.\n      This typically involves identifying the position and size of text, images and graphics, font types, colours and text\n      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.\n    ', null);
+        this._text_15 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_16 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_17 = this.renderer.createText(this._el_16, 'Determining the evaluation criteria.', null);
+        this._text_18 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_19 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_20 = this.renderer.createText(this._el_19, '\n      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from\n      the solution requirements identified in the analysis stage.\n    ', null);
+        this._text_21 = this.renderer.createText(this._el_4, '\n  ', null);
+        this._text_22 = this.renderer.createText(this._el_0, '\n', null);
+        this.init(this._el_0, (this.renderer.directRenderer ? null : [
+            this._el_0,
+            this._text_1,
+            this._anchor_2,
+            this._text_3,
+            this._el_4,
+            this._text_5,
+            this._el_6,
+            this._text_7,
+            this._text_8,
+            this._el_9,
+            this._text_10,
+            this._el_11,
+            this._text_12,
+            this._el_13,
+            this._text_14,
+            this._text_15,
+            this._el_16,
+            this._text_17,
+            this._text_18,
+            this._el_19,
+            this._text_20,
+            this._text_21,
+            this._text_22
+        ]), null);
+        return null;
+    };
+    View_AppComponent15.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (2 === requestNodeIndex))) {
+            return this._TemplateRef_2_5;
+        }
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (2 === requestNodeIndex))) {
+            return this._NgIf_2_6.context;
+        }
+        return notFoundResult;
+    };
+    View_AppComponent15.prototype.detectChangesInternal = function (throwOnChange) {
+        var currVal_2_0_0 = !this.parentView.context.navVis[3];
+        this._NgIf_2_6.check_ngIf(currVal_2_0_0, throwOnChange, false);
+        this._NgIf_2_6.ngDoCheck(this, this._anchor_2, throwOnChange);
+        this._vc_2.detectChangesInNestedViews(throwOnChange);
+    };
+    View_AppComponent15.prototype.dirtyParentQueriesInternal = function () {
+        this.parentView._viewQuery_evaluation_4.setDirty();
+    };
+    View_AppComponent15.prototype.destroyInternal = function () {
+        this._vc_2.destroyNestedViews();
+    };
+    View_AppComponent15.prototype.visitRootNodesInternal = function (cb, ctx) {
+        cb(this._el_0, ctx);
+    };
+    View_AppComponent15.prototype.createEmbeddedViewInternal = function (nodeIndex) {
+        if ((nodeIndex == 2)) {
+            return new View_AppComponent16(this.viewUtils, this, 2, this._anchor_2, this._vc_2);
+        }
+        return null;
+    };
+    return View_AppComponent15;
 }(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
 var renderType_AppComponent = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].Emulated, styles_AppComponent, {});
 var View_AppComponent0 = (function (_super) {
@@ -871,16 +1301,16 @@ var View_AppComponent0 = (function (_super) {
     }
     View_AppComponent0.prototype.createInternal = function (rootSelector) {
         var parentRenderNode = this.renderer.createViewRoot(this.parentElement);
-        this._viewQuery_landing_0 = new __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__["a" /* QueryList */]();
-        this._viewQuery_analysis_1 = new __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__["a" /* QueryList */]();
-        this._viewQuery_design_2 = new __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__["a" /* QueryList */]();
-        this._viewQuery_development_3 = new __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__["a" /* QueryList */]();
-        this._viewQuery_evaluation_4 = new __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__["a" /* QueryList */]();
-        this._viewQuery_NavComponent_5 = new __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_query_list__["a" /* QueryList */]();
+        this._viewQuery_landing_0 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__["a" /* QueryList */]();
+        this._viewQuery_analysis_1 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__["a" /* QueryList */]();
+        this._viewQuery_design_2 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__["a" /* QueryList */]();
+        this._viewQuery_development_3 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__["a" /* QueryList */]();
+        this._viewQuery_evaluation_4 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__["a" /* QueryList */]();
+        this._viewQuery_NavComponent_5 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_linker_query_list__["a" /* QueryList */]();
         this._text_0 = this.renderer.createText(parentRenderNode, '\n', null);
         this._el_1 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'app-nav', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this.compView_1 = new __WEBPACK_IMPORTED_MODULE_17__nav_nav_component_ngfactory__["a" /* View_NavComponent0 */](this.viewUtils, this, 1, this._el_1);
-        this._NavComponent_1_3 = new __WEBPACK_IMPORTED_MODULE_17__nav_nav_component_ngfactory__["b" /* Wrapper_NavComponent */]();
+        this.compView_1 = new __WEBPACK_IMPORTED_MODULE_19__nav_nav_component_ngfactory__["a" /* View_NavComponent0 */](this.viewUtils, this, 1, this._el_1);
+        this._NavComponent_1_3 = new __WEBPACK_IMPORTED_MODULE_19__nav_nav_component_ngfactory__["b" /* Wrapper_NavComponent */]();
         this.compView_1.create(this._NavComponent_1_3.context);
         this._text_2 = this.renderer.createText(parentRenderNode, '\n', null);
         this._el_3 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'fixed'), null);
@@ -888,178 +1318,51 @@ var View_AppComponent0 = (function (_super) {
         this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3, null);
         this._vc_5 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](5, 3, this, this._anchor_5);
         this._TemplateRef_5_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 5, this._anchor_5);
-        this._NgIf_5_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_5.vcRef, this._TemplateRef_5_5);
+        this._NgIf_5_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_5.vcRef, this._TemplateRef_5_5);
         this._text_6 = this.renderer.createText(this._el_3, '\n  ', null);
         this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3, null);
         this._vc_7 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](7, 3, this, this._anchor_7);
         this._TemplateRef_7_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 7, this._anchor_7);
-        this._NgIf_7_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_7.vcRef, this._TemplateRef_7_5);
+        this._NgIf_7_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_7.vcRef, this._TemplateRef_7_5);
         this._text_8 = this.renderer.createText(this._el_3, '\n  ', null);
         this._anchor_9 = this.renderer.createTemplateAnchor(this._el_3, null);
         this._vc_9 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](9, 3, this, this._anchor_9);
         this._TemplateRef_9_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 9, this._anchor_9);
-        this._NgIf_9_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_9.vcRef, this._TemplateRef_9_5);
+        this._NgIf_9_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_9.vcRef, this._TemplateRef_9_5);
         this._text_10 = this.renderer.createText(this._el_3, '\n  ', null);
         this._anchor_11 = this.renderer.createTemplateAnchor(this._el_3, null);
         this._vc_11 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](11, 3, this, this._anchor_11);
         this._TemplateRef_11_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 11, this._anchor_11);
-        this._NgIf_11_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_11.vcRef, this._TemplateRef_11_5);
+        this._NgIf_11_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_11.vcRef, this._TemplateRef_11_5);
         this._text_12 = this.renderer.createText(this._el_3, '\n', null);
         this._text_13 = this.renderer.createText(parentRenderNode, '\n', null);
         this._el_14 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'landing'), null);
         this._text_15 = this.renderer.createText(this._el_14, '\n', null);
         this._text_16 = this.renderer.createText(parentRenderNode, '\n', null);
-        this._el_17 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'analysis'), null);
-        this._text_18 = this.renderer.createText(this._el_17, '\n  ', null);
-        this._anchor_19 = this.renderer.createTemplateAnchor(this._el_17, null);
-        this._vc_19 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](19, 17, this, this._anchor_19);
+        this._anchor_17 = this.renderer.createTemplateAnchor(parentRenderNode, null);
+        this._vc_17 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](17, null, this, this._anchor_17);
+        this._TemplateRef_17_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 17, this._anchor_17);
+        this._NgIf_17_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_17.vcRef, this._TemplateRef_17_5);
+        this._text_18 = this.renderer.createText(parentRenderNode, '\n', null);
+        this._anchor_19 = this.renderer.createTemplateAnchor(parentRenderNode, null);
+        this._vc_19 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](19, null, this, this._anchor_19);
         this._TemplateRef_19_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 19, this._anchor_19);
-        this._NgIf_19_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_19.vcRef, this._TemplateRef_19_5);
-        this._text_20 = this.renderer.createText(this._el_17, '\n  ', null);
-        this._el_21 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_17, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
-        this._text_22 = this.renderer.createText(this._el_21, '\n    ', null);
-        this._el_23 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_24 = this.renderer.createText(this._el_23, 'Determining the solution requirements', null);
-        this._text_25 = this.renderer.createText(this._el_21, '\n    ', null);
-        this._el_26 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_27 = this.renderer.createText(this._el_26, 'What output is the solution to provide? What data is needed to produce the output? What functions must the solution provide?\n      ', null);
-        this._el_28 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_26, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._el_29 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_26, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_30 = this.renderer.createText(this._el_26, ' These requirements can be classified as being functional, that is, what the solution is required to do,\n      and non-functional, which describes the attributes the solution should possess including useability, reliability, portability,\n      robustness, maintainability.\n      ', null);
-        this._el_31 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_26, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._el_32 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_26, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_33 = this.renderer.createText(this._el_26, ' Tools to assist in determining the solution requirements include context diagrams, data flow diagrams and\n      use cases.\n    ', null);
-        this._text_34 = this.renderer.createText(this._el_21, '\n    ', null);
-        this._el_35 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_36 = this.renderer.createText(this._el_35, 'Identifying the constraints on the solution', null);
-        this._text_37 = this.renderer.createText(this._el_21, '\n    ', null);
-        this._el_38 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_39 = this.renderer.createText(this._el_38, '\n      What conditions need to be considered when designing a solution? Typical constraints include economic, such as cost and time;\n      technical, such as speed of processing, capacity, availability of equipment, compatibility and security; social, such\n      as level of expertise of users; legal, such as ownership and privacy of data requirements; and useability, such as\n      usefulness and ease of use of solutions.\n    ', null);
-        this._text_40 = this.renderer.createText(this._el_21, '\n    ', null);
-        this._el_41 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_42 = this.renderer.createText(this._el_41, 'Determining the scope of the solution', null);
-        this._text_43 = this.renderer.createText(this._el_21, '\n    ', null);
-        this._el_44 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_21, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_45 = this.renderer.createText(this._el_44, 'Determining the scope of the solution. The scope states the boundaries or parameters of the solution. It identifies the\n      area of interest or what aspects of the problem will and will not be addressed by the solution.\n    ', null);
-        this._text_46 = this.renderer.createText(this._el_21, '\n  ', null);
-        this._text_47 = this.renderer.createText(this._el_17, '\n', null);
-        this._text_48 = this.renderer.createText(parentRenderNode, '\n', null);
-        this._el_49 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'design'), null);
-        this._text_50 = this.renderer.createText(this._el_49, '\n  ', null);
-        this._anchor_51 = this.renderer.createTemplateAnchor(this._el_49, null);
-        this._vc_51 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](51, 49, this, this._anchor_51);
-        this._TemplateRef_51_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 51, this._anchor_51);
-        this._NgIf_51_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_51.vcRef, this._TemplateRef_51_5);
-        this._text_52 = this.renderer.createText(this._el_49, '\n  ', null);
-        this._el_53 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_49, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
-        this._text_54 = this.renderer.createText(this._el_53, '\n    ', null);
-        this._el_55 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_53, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_56 = this.renderer.createText(this._el_55, 'Planning how the solution will function and its appearance.', null);
-        this._text_57 = this.renderer.createText(this._el_53, '\n    ', null);
-        this._el_58 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_53, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_59 = this.renderer.createText(this._el_58, 'The solution design typically involves identifying what specific data is required and how the data will be named, structured,\n      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,\n      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where\n      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,\n      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships\n      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,\n      and context diagrams.\n      ', null);
-        this._el_60 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_58, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_61 = this.renderer.createText(this._el_58, ' ', null);
-        this._el_62 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_58, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_63 = this.renderer.createText(this._el_58, 'Planning the solution also involves determining its appearance, including, where appropriate, the user interface.\n      This typically involves identifying the position and size of text, images and graphics, font types, colours and text\n      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.\n    ', null);
-        this._text_64 = this.renderer.createText(this._el_53, '\n    ', null);
-        this._el_65 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_53, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_66 = this.renderer.createText(this._el_65, 'Determining the evaluation criteria.', null);
-        this._text_67 = this.renderer.createText(this._el_53, '\n    ', null);
-        this._el_68 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_53, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_69 = this.renderer.createText(this._el_68, '\n      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from\n      the solution requirements identified in the analysis stage.\n    ', null);
-        this._text_70 = this.renderer.createText(this._el_53, '\n  ', null);
-        this._text_71 = this.renderer.createText(this._el_49, '\n', null);
-        this._text_72 = this.renderer.createText(parentRenderNode, '\n', null);
-        this._el_73 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'development'), null);
-        this._text_74 = this.renderer.createText(this._el_73, '\n  ', null);
-        this._anchor_75 = this.renderer.createTemplateAnchor(this._el_73, null);
-        this._vc_75 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](75, 73, this, this._anchor_75);
-        this._TemplateRef_75_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 75, this._anchor_75);
-        this._NgIf_75_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_75.vcRef, this._TemplateRef_75_5);
-        this._text_76 = this.renderer.createText(this._el_73, '\n  ', null);
-        this._el_77 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_73, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
-        this._text_78 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_79 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_80 = this.renderer.createText(this._el_79, 'Electronically ‘building’ or creating the solution following initial designs.', null);
-        this._text_81 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_82 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_83 = this.renderer.createText(this._el_82, 'It may, however, warrant modifying initial designs in order to create a working solution.', null);
-        this._text_84 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_85 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_86 = this.renderer.createText(this._el_85, 'Validation to check for the reasonableness of data being input.', null);
-        this._text_87 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_88 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_89 = this.renderer.createText(this._el_88, '\n      Validation can be both manual and electronic. Proofreading is a manual technique and it occurs when a human scans the data\n      for errors. Electronic validation occurs when the validation process is built into the solution. Its effectiveness\n      is determined through the testing activity.\n    ', null);
-        this._text_90 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_91 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_92 = this.renderer.createText(this._el_91, 'Testing whether the solution does what it was intended to do. This activity typically involves:', null);
-        this._text_93 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_94 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'ul', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_95 = this.renderer.createText(this._el_94, '\n      ', null);
-        this._el_96 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_94, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_97 = this.renderer.createText(this._el_96, 'establishing what tests will be conducted', null);
-        this._text_98 = this.renderer.createText(this._el_94, '\n      ', null);
-        this._el_99 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_94, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_100 = this.renderer.createText(this._el_99, 'determining what test data will be used', null);
-        this._text_101 = this.renderer.createText(this._el_94, '\n      ', null);
-        this._el_102 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_94, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_103 = this.renderer.createText(this._el_102, 'determining expected results', null);
-        this._text_104 = this.renderer.createText(this._el_94, '\n      ', null);
-        this._el_105 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_94, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_106 = this.renderer.createText(this._el_105, 'conducting the test', null);
-        this._text_107 = this.renderer.createText(this._el_94, '\n      ', null);
-        this._el_108 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_94, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_109 = this.renderer.createText(this._el_108, 'recording the actual results', null);
-        this._text_110 = this.renderer.createText(this._el_94, '\n      ', null);
-        this._el_111 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_94, 'li', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_112 = this.renderer.createText(this._el_111, 'correcting any identified errors', null);
-        this._text_113 = this.renderer.createText(this._el_94, '\n    ', null);
-        this._text_114 = this.renderer.createText(this._el_77, '\n    ', null);
-        this._el_115 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_77, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_116 = this.renderer.createText(this._el_115, 'Writing internal and user documentation, including within the user interface, to support the functioning and use of the\n      solution.\n    ', null);
-        this._text_117 = this.renderer.createText(this._el_77, '\n  ', null);
-        this._text_118 = this.renderer.createText(this._el_73, '\n', null);
-        this._text_119 = this.renderer.createText(parentRenderNode, '\n', null);
-        this._el_120 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'section', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray4"](4, 'class', 'page', 'id', 'evaluation'), null);
-        this._text_121 = this.renderer.createText(this._el_120, '\n  ', null);
-        this._anchor_122 = this.renderer.createTemplateAnchor(this._el_120, null);
-        this._vc_122 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](122, 120, this, this._anchor_122);
-        this._TemplateRef_122_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 122, this._anchor_122);
-        this._NgIf_122_6 = new __WEBPACK_IMPORTED_MODULE_18__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_122.vcRef, this._TemplateRef_122_5);
-        this._text_123 = this.renderer.createText(this._el_120, '\n  ', null);
-        this._el_124 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_120, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
-        this._text_125 = this.renderer.createText(this._el_124, '\n    ', null);
-        this._el_126 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_124, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_127 = this.renderer.createText(this._el_126, 'Planning how the solution will function and its appearance.', null);
-        this._text_128 = this.renderer.createText(this._el_124, '\n    ', null);
-        this._el_129 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_124, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_130 = this.renderer.createText(this._el_129, 'The solution design typically involves identifying what specific data is required and how the data will be named, structured,\n      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,\n      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where\n      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,\n      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships\n      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,\n      and context diagrams.\n      ', null);
-        this._el_131 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_129, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_132 = this.renderer.createText(this._el_129, ' ', null);
-        this._el_133 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_129, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_134 = this.renderer.createText(this._el_129, 'Planning the solution also involves determining its appearance, including, where appropriate, the user interface.\n      This typically involves identifying the position and size of text, images and graphics, font types, colours and text\n      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.\n    ', null);
-        this._text_135 = this.renderer.createText(this._el_124, '\n    ', null);
-        this._el_136 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_124, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_137 = this.renderer.createText(this._el_136, 'Determining the evaluation criteria.', null);
-        this._text_138 = this.renderer.createText(this._el_124, '\n    ', null);
-        this._el_139 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_124, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_140 = this.renderer.createText(this._el_139, '\n      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from\n      the solution requirements identified in the analysis stage.\n    ', null);
-        this._text_141 = this.renderer.createText(this._el_124, '\n  ', null);
-        this._text_142 = this.renderer.createText(this._el_120, '\n', null);
-        this._text_143 = this.renderer.createText(parentRenderNode, '\n', null);
+        this._NgIf_19_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_19.vcRef, this._TemplateRef_19_5);
+        this._text_20 = this.renderer.createText(parentRenderNode, '\n', null);
+        this._anchor_21 = this.renderer.createTemplateAnchor(parentRenderNode, null);
+        this._vc_21 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](21, null, this, this._anchor_21);
+        this._TemplateRef_21_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 21, this._anchor_21);
+        this._NgIf_21_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_21.vcRef, this._TemplateRef_21_5);
+        this._text_22 = this.renderer.createText(parentRenderNode, '\n', null);
+        this._anchor_23 = this.renderer.createTemplateAnchor(parentRenderNode, null);
+        this._vc_23 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_linker_view_container__["a" /* ViewContainer */](23, null, this, this._anchor_23);
+        this._TemplateRef_23_5 = new __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 23, this._anchor_23);
+        this._NgIf_23_6 = new __WEBPACK_IMPORTED_MODULE_15__gendir_node_modules_angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_23.vcRef, this._TemplateRef_23_5);
+        this._text_24 = this.renderer.createText(parentRenderNode, '\n', null);
         var disposable_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_1, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'onclick', null), this.eventHandler(this.handleEvent_1));
         this._NavComponent_1_3.subscribe(this, this.eventHandler(this.handleEvent_1), true);
-        this._viewQuery_landing_0.reset([new __WEBPACK_IMPORTED_MODULE_19__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_14)]);
+        this._viewQuery_landing_0.reset([new __WEBPACK_IMPORTED_MODULE_20__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_14)]);
         this.context.landing = this._viewQuery_landing_0.first;
-        this._viewQuery_analysis_1.reset([new __WEBPACK_IMPORTED_MODULE_19__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_17)]);
-        this.context.analysis = this._viewQuery_analysis_1.first;
-        this._viewQuery_design_2.reset([new __WEBPACK_IMPORTED_MODULE_19__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_49)]);
-        this.context.design = this._viewQuery_design_2.first;
-        this._viewQuery_development_3.reset([new __WEBPACK_IMPORTED_MODULE_19__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_73)]);
-        this.context.development = this._viewQuery_development_3.first;
-        this._viewQuery_evaluation_4.reset([new __WEBPACK_IMPORTED_MODULE_19__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_120)]);
-        this.context.evaluation = this._viewQuery_evaluation_4.first;
         this._viewQuery_NavComponent_5.reset([this._NavComponent_1_3.context]);
         this.context.nav = this._viewQuery_NavComponent_5.first;
         this.init(null, (this.renderer.directRenderer ? null : [
@@ -1080,187 +1383,68 @@ var View_AppComponent0 = (function (_super) {
             this._el_14,
             this._text_15,
             this._text_16,
-            this._el_17,
+            this._anchor_17,
             this._text_18,
             this._anchor_19,
             this._text_20,
-            this._el_21,
+            this._anchor_21,
             this._text_22,
-            this._el_23,
-            this._text_24,
-            this._text_25,
-            this._el_26,
-            this._text_27,
-            this._el_28,
-            this._el_29,
-            this._text_30,
-            this._el_31,
-            this._el_32,
-            this._text_33,
-            this._text_34,
-            this._el_35,
-            this._text_36,
-            this._text_37,
-            this._el_38,
-            this._text_39,
-            this._text_40,
-            this._el_41,
-            this._text_42,
-            this._text_43,
-            this._el_44,
-            this._text_45,
-            this._text_46,
-            this._text_47,
-            this._text_48,
-            this._el_49,
-            this._text_50,
-            this._anchor_51,
-            this._text_52,
-            this._el_53,
-            this._text_54,
-            this._el_55,
-            this._text_56,
-            this._text_57,
-            this._el_58,
-            this._text_59,
-            this._el_60,
-            this._text_61,
-            this._el_62,
-            this._text_63,
-            this._text_64,
-            this._el_65,
-            this._text_66,
-            this._text_67,
-            this._el_68,
-            this._text_69,
-            this._text_70,
-            this._text_71,
-            this._text_72,
-            this._el_73,
-            this._text_74,
-            this._anchor_75,
-            this._text_76,
-            this._el_77,
-            this._text_78,
-            this._el_79,
-            this._text_80,
-            this._text_81,
-            this._el_82,
-            this._text_83,
-            this._text_84,
-            this._el_85,
-            this._text_86,
-            this._text_87,
-            this._el_88,
-            this._text_89,
-            this._text_90,
-            this._el_91,
-            this._text_92,
-            this._text_93,
-            this._el_94,
-            this._text_95,
-            this._el_96,
-            this._text_97,
-            this._text_98,
-            this._el_99,
-            this._text_100,
-            this._text_101,
-            this._el_102,
-            this._text_103,
-            this._text_104,
-            this._el_105,
-            this._text_106,
-            this._text_107,
-            this._el_108,
-            this._text_109,
-            this._text_110,
-            this._el_111,
-            this._text_112,
-            this._text_113,
-            this._text_114,
-            this._el_115,
-            this._text_116,
-            this._text_117,
-            this._text_118,
-            this._text_119,
-            this._el_120,
-            this._text_121,
-            this._anchor_122,
-            this._text_123,
-            this._el_124,
-            this._text_125,
-            this._el_126,
-            this._text_127,
-            this._text_128,
-            this._el_129,
-            this._text_130,
-            this._el_131,
-            this._text_132,
-            this._el_133,
-            this._text_134,
-            this._text_135,
-            this._el_136,
-            this._text_137,
-            this._text_138,
-            this._el_139,
-            this._text_140,
-            this._text_141,
-            this._text_142,
-            this._text_143
+            this._anchor_23,
+            this._text_24
         ]), [disposable_0]);
         return null;
     };
     View_AppComponent0.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_16__app_nav_nav_component__["a" /* NavComponent */]) && (1 === requestNodeIndex))) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_18__app_nav_nav_component__["a" /* NavComponent */]) && (1 === requestNodeIndex))) {
             return this._NavComponent_1_3.context;
         }
         if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (5 === requestNodeIndex))) {
             return this._TemplateRef_5_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (5 === requestNodeIndex))) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (5 === requestNodeIndex))) {
             return this._NgIf_5_6.context;
         }
         if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (7 === requestNodeIndex))) {
             return this._TemplateRef_7_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (7 === requestNodeIndex))) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (7 === requestNodeIndex))) {
             return this._NgIf_7_6.context;
         }
         if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (9 === requestNodeIndex))) {
             return this._TemplateRef_9_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (9 === requestNodeIndex))) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (9 === requestNodeIndex))) {
             return this._NgIf_9_6.context;
         }
         if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (11 === requestNodeIndex))) {
             return this._TemplateRef_11_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (11 === requestNodeIndex))) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (11 === requestNodeIndex))) {
             return this._NgIf_11_6.context;
+        }
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (17 === requestNodeIndex))) {
+            return this._TemplateRef_17_5;
+        }
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (17 === requestNodeIndex))) {
+            return this._NgIf_17_6.context;
         }
         if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (19 === requestNodeIndex))) {
             return this._TemplateRef_19_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (19 === requestNodeIndex))) {
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (19 === requestNodeIndex))) {
             return this._NgIf_19_6.context;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (51 === requestNodeIndex))) {
-            return this._TemplateRef_51_5;
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (21 === requestNodeIndex))) {
+            return this._TemplateRef_21_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (51 === requestNodeIndex))) {
-            return this._NgIf_51_6.context;
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (21 === requestNodeIndex))) {
+            return this._NgIf_21_6.context;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (75 === requestNodeIndex))) {
-            return this._TemplateRef_75_5;
+        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (23 === requestNodeIndex))) {
+            return this._TemplateRef_23_5;
         }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (75 === requestNodeIndex))) {
-            return this._NgIf_75_6.context;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_12__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (122 === requestNodeIndex))) {
-            return this._TemplateRef_122_5;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (122 === requestNodeIndex))) {
-            return this._NgIf_122_6.context;
+        if (((token === __WEBPACK_IMPORTED_MODULE_16__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (23 === requestNodeIndex))) {
+            return this._NgIf_23_6.context;
         }
         return notFoundResult;
     };
@@ -1278,37 +1462,63 @@ var View_AppComponent0 = (function (_super) {
         var currVal_11_0_0 = this.context.navVis[3];
         this._NgIf_11_6.check_ngIf(currVal_11_0_0, throwOnChange, false);
         this._NgIf_11_6.ngDoCheck(this, this._anchor_11, throwOnChange);
-        var currVal_19_0_0 = !this.context.navVis[0];
+        var currVal_17_0_0 = this.context.setup;
+        this._NgIf_17_6.check_ngIf(currVal_17_0_0, throwOnChange, false);
+        this._NgIf_17_6.ngDoCheck(this, this._anchor_17, throwOnChange);
+        var currVal_19_0_0 = this.context.setup;
         this._NgIf_19_6.check_ngIf(currVal_19_0_0, throwOnChange, false);
         this._NgIf_19_6.ngDoCheck(this, this._anchor_19, throwOnChange);
-        var currVal_51_0_0 = !this.context.navVis[1];
-        this._NgIf_51_6.check_ngIf(currVal_51_0_0, throwOnChange, false);
-        this._NgIf_51_6.ngDoCheck(this, this._anchor_51, throwOnChange);
-        var currVal_75_0_0 = !this.context.navVis[2];
-        this._NgIf_75_6.check_ngIf(currVal_75_0_0, throwOnChange, false);
-        this._NgIf_75_6.ngDoCheck(this, this._anchor_75, throwOnChange);
-        var currVal_122_0_0 = !this.context.navVis[3];
-        this._NgIf_122_6.check_ngIf(currVal_122_0_0, throwOnChange, false);
-        this._NgIf_122_6.ngDoCheck(this, this._anchor_122, throwOnChange);
+        var currVal_21_0_0 = this.context.setup;
+        this._NgIf_21_6.check_ngIf(currVal_21_0_0, throwOnChange, false);
+        this._NgIf_21_6.ngDoCheck(this, this._anchor_21, throwOnChange);
+        var currVal_23_0_0 = this.context.setup;
+        this._NgIf_23_6.check_ngIf(currVal_23_0_0, throwOnChange, false);
+        this._NgIf_23_6.ngDoCheck(this, this._anchor_23, throwOnChange);
         this._vc_5.detectChangesInNestedViews(throwOnChange);
         this._vc_7.detectChangesInNestedViews(throwOnChange);
         this._vc_9.detectChangesInNestedViews(throwOnChange);
         this._vc_11.detectChangesInNestedViews(throwOnChange);
+        this._vc_17.detectChangesInNestedViews(throwOnChange);
         this._vc_19.detectChangesInNestedViews(throwOnChange);
-        this._vc_51.detectChangesInNestedViews(throwOnChange);
-        this._vc_75.detectChangesInNestedViews(throwOnChange);
-        this._vc_122.detectChangesInNestedViews(throwOnChange);
+        this._vc_21.detectChangesInNestedViews(throwOnChange);
+        this._vc_23.detectChangesInNestedViews(throwOnChange);
         this.compView_1.internalDetectChanges(throwOnChange);
+        if (!throwOnChange) {
+            if (this._viewQuery_analysis_1.dirty) {
+                this._viewQuery_analysis_1.reset([this._vc_17.mapNestedViews(View_AppComponent9, function (nestedView) {
+                        return [new __WEBPACK_IMPORTED_MODULE_20__angular_core_src_linker_element_ref__["a" /* ElementRef */](nestedView._el_0)];
+                    })]);
+                this.context.analysis = this._viewQuery_analysis_1.first;
+            }
+            if (this._viewQuery_design_2.dirty) {
+                this._viewQuery_design_2.reset([this._vc_19.mapNestedViews(View_AppComponent11, function (nestedView) {
+                        return [new __WEBPACK_IMPORTED_MODULE_20__angular_core_src_linker_element_ref__["a" /* ElementRef */](nestedView._el_0)];
+                    })]);
+                this.context.design = this._viewQuery_design_2.first;
+            }
+            if (this._viewQuery_development_3.dirty) {
+                this._viewQuery_development_3.reset([this._vc_21.mapNestedViews(View_AppComponent13, function (nestedView) {
+                        return [new __WEBPACK_IMPORTED_MODULE_20__angular_core_src_linker_element_ref__["a" /* ElementRef */](nestedView._el_0)];
+                    })]);
+                this.context.development = this._viewQuery_development_3.first;
+            }
+            if (this._viewQuery_evaluation_4.dirty) {
+                this._viewQuery_evaluation_4.reset([this._vc_23.mapNestedViews(View_AppComponent15, function (nestedView) {
+                        return [new __WEBPACK_IMPORTED_MODULE_20__angular_core_src_linker_element_ref__["a" /* ElementRef */](nestedView._el_0)];
+                    })]);
+                this.context.evaluation = this._viewQuery_evaluation_4.first;
+            }
+        }
     };
     View_AppComponent0.prototype.destroyInternal = function () {
         this._vc_5.destroyNestedViews();
         this._vc_7.destroyNestedViews();
         this._vc_9.destroyNestedViews();
         this._vc_11.destroyNestedViews();
+        this._vc_17.destroyNestedViews();
         this._vc_19.destroyNestedViews();
-        this._vc_51.destroyNestedViews();
-        this._vc_75.destroyNestedViews();
-        this._vc_122.destroyNestedViews();
+        this._vc_21.destroyNestedViews();
+        this._vc_23.destroyNestedViews();
         this.compView_1.destroy();
         this._NavComponent_1_3.ngOnDestroy();
     };
@@ -1325,17 +1535,17 @@ var View_AppComponent0 = (function (_super) {
         if ((nodeIndex == 11)) {
             return new View_AppComponent7(this.viewUtils, this, 11, this._anchor_11, this._vc_11);
         }
+        if ((nodeIndex == 17)) {
+            return new View_AppComponent9(this.viewUtils, this, 17, this._anchor_17, this._vc_17);
+        }
         if ((nodeIndex == 19)) {
-            return new View_AppComponent9(this.viewUtils, this, 19, this._anchor_19, this._vc_19);
+            return new View_AppComponent11(this.viewUtils, this, 19, this._anchor_19, this._vc_19);
         }
-        if ((nodeIndex == 51)) {
-            return new View_AppComponent10(this.viewUtils, this, 51, this._anchor_51, this._vc_51);
+        if ((nodeIndex == 21)) {
+            return new View_AppComponent13(this.viewUtils, this, 21, this._anchor_21, this._vc_21);
         }
-        if ((nodeIndex == 75)) {
-            return new View_AppComponent11(this.viewUtils, this, 75, this._anchor_75, this._vc_75);
-        }
-        if ((nodeIndex == 122)) {
-            return new View_AppComponent12(this.viewUtils, this, 122, this._anchor_122, this._vc_122);
+        if ((nodeIndex == 23)) {
+            return new View_AppComponent15(this.viewUtils, this, 23, this._anchor_23, this._vc_23);
         }
         return null;
     };
@@ -2175,7 +2385,7 @@ var View_NavComponent0 = (function (_super) {
  * @suppress {suspiciousCode,uselessCode,missingProperties}
  */
 /* tslint:disable */
-var styles = ['.nav.analysis[_ngcontent-%COMP%] {\n  background-color: #BB6BD9;\n  top: -0.25rem;\n  left: -0.40625rem; }\n  .landing[_ngcontent-%COMP%]   .nav.analysis[_ngcontent-%COMP%] {\n    top: -0.5rem;\n    left: -0.8125rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.analysis[_ngcontent-%COMP%] {\n    left: -8.75rem;\n    top: -10rem;\n    border: 4px solid #a842cf; }\n  .open[_ngcontent-%COMP%]   .nav.analysis[_ngcontent-%COMP%] {\n    left: 1.75rem;\n    top: -5.5rem; }\n\n.nav.design[_ngcontent-%COMP%] {\n  background-color: #09c;\n  top: -0.40625rem;\n  left: 0.25rem; }\n  .landing[_ngcontent-%COMP%]   .nav.design[_ngcontent-%COMP%] {\n    top: -0.8125rem;\n    left: 0.5rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.design[_ngcontent-%COMP%] {\n    left: 10rem;\n    top: -8.75rem;\n    border: 4px solid #007399; }\n  .open[_ngcontent-%COMP%]   .nav.design[_ngcontent-%COMP%] {\n    left: 5rem;\n    top: -2.25rem; }\n\n.nav.development[_ngcontent-%COMP%] {\n  background-color: #00e25e;\n  top: 0.25rem;\n  left: 0.40625rem; }\n  .landing[_ngcontent-%COMP%]   .nav.development[_ngcontent-%COMP%] {\n    top: 0.5rem;\n    left: 0.8125rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.development[_ngcontent-%COMP%] {\n    left: 8.75rem;\n    top: 10rem;\n    border: 4px solid #00af49; }\n  .open[_ngcontent-%COMP%]   .nav.development[_ngcontent-%COMP%] {\n    left: 5rem;\n    top: 2.25rem; }\n\n.nav.evaluation[_ngcontent-%COMP%] {\n  background-color: #fbc02d;\n  top: 0.40625rem;\n  left: -0.25rem; }\n  .landing[_ngcontent-%COMP%]   .nav.evaluation[_ngcontent-%COMP%] {\n    top: 0.8125rem;\n    left: -0.5rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.evaluation[_ngcontent-%COMP%] {\n    left: -8.75rem;\n    top: 10rem;\n    border: 4px solid #f0ad05; }\n  .open[_ngcontent-%COMP%]   .nav.evaluation[_ngcontent-%COMP%] {\n    left: 1.75rem;\n    top: 5.5rem; }\n\n.nav[_ngcontent-%COMP%] {\n  mix-blend-mode: multiply;\n  width: 5rem;\n  height: 5rem;\n  border-radius: 5rem;\n  z-index: 1;\n  -webkit-transition: all ease-in-out 0.84s, top cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, left cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, color ease-in-out 0.28s;\n  transition: all ease-in-out 0.84s, top cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, left cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, color ease-in-out 0.28s; }\n  .nav[_ngcontent-%COMP%]   .nav-text[_ngcontent-%COMP%] {\n    position: absolute;\n    color: inherit;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    font-size: 0.75rem;\n    -webkit-transition: font-size ease-in-out 0.84s;\n    transition: font-size ease-in-out 0.84s; }\n  .nav[_ngcontent-%COMP%]:not(.bg) {\n    position: absolute;\n    color: black; }\n    .nav[_ngcontent-%COMP%]:not(.bg)   .nav-text[_ngcontent-%COMP%] {\n      opacity: 0;\n      -webkit-transition: opacity 0.84s ease-in-out;\n      transition: opacity 0.84s ease-in-out; }\n      .open[_ngcontent-%COMP%]   .nav[_ngcontent-%COMP%]:not(.bg)   .nav-text[_ngcontent-%COMP%] {\n        opacity: 1; }\n  .nav.bg[_ngcontent-%COMP%] {\n    position: relative;\n    margin-left: 1rem;\n    color: white; }\n    .open[_ngcontent-%COMP%]   .nav.bg[_ngcontent-%COMP%] {\n      border: .3125rem solid #eee;\n      color: black; }\n    .nav.bg[_ngcontent-%COMP%]    > .nav-text[_ngcontent-%COMP%] {\n      font-size: 1.25rem; }\n  .nav-container[_ngcontent-%COMP%] {\n    z-index: 20;\n    -webkit-transition: all .86s ease-in-out;\n    transition: all .86s ease-in-out;\n    position: fixed;\n    top: 50%;\n    left: 0;\n    -webkit-transform: translate(0, -50%);\n            transform: translate(0, -50%); }\n    .nav-container.landing[_ngcontent-%COMP%] {\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%);\n      left: 50%;\n      position: absolute; }\n\n.landing[_ngcontent-%COMP%]   .nav[_ngcontent-%COMP%] {\n  width: 10rem;\n  height: 10rem;\n  border-radius: 10rem; }\n  .landing[_ngcontent-%COMP%]   .nav.bg[_ngcontent-%COMP%] {\n    margin-left: 0; }\n    .landing[_ngcontent-%COMP%]   .nav.bg[_ngcontent-%COMP%]    > .nav-text[_ngcontent-%COMP%] {\n      font-size: 2.5rem; }\n  .landing[_ngcontent-%COMP%]   .nav[_ngcontent-%COMP%]   .nav-text[_ngcontent-%COMP%] {\n    font-size: 1.5rem; }\n\n.nav-text[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  z-index: 2; }'];
+var styles = ['.nav.analysis[_ngcontent-%COMP%] {\n  background-color: #BB6BD9;\n  top: -0.25rem;\n  left: -0.40625rem; }\n  .landing[_ngcontent-%COMP%]   .nav.analysis[_ngcontent-%COMP%] {\n    top: -0.5rem;\n    left: -0.8125rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.analysis[_ngcontent-%COMP%] {\n    left: -8.75rem;\n    top: -10rem;\n    border: 4px solid #a842cf; }\n  .open[_ngcontent-%COMP%]   .nav.analysis[_ngcontent-%COMP%] {\n    left: 1.75rem;\n    top: -5.5rem; }\n\n.nav.design[_ngcontent-%COMP%] {\n  background-color: #09c;\n  top: -0.40625rem;\n  left: 0.25rem; }\n  .landing[_ngcontent-%COMP%]   .nav.design[_ngcontent-%COMP%] {\n    top: -0.8125rem;\n    left: 0.5rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.design[_ngcontent-%COMP%] {\n    left: 10rem;\n    top: -8.75rem;\n    border: 4px solid #007399; }\n  .open[_ngcontent-%COMP%]   .nav.design[_ngcontent-%COMP%] {\n    left: 5rem;\n    top: -2.25rem; }\n\n.nav.development[_ngcontent-%COMP%] {\n  background-color: #00e25e;\n  top: 0.25rem;\n  left: 0.40625rem; }\n  .landing[_ngcontent-%COMP%]   .nav.development[_ngcontent-%COMP%] {\n    top: 0.5rem;\n    left: 0.8125rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.development[_ngcontent-%COMP%] {\n    left: 8.75rem;\n    top: 10rem;\n    border: 4px solid #00af49; }\n  .open[_ngcontent-%COMP%]   .nav.development[_ngcontent-%COMP%] {\n    left: 5rem;\n    top: 2.25rem; }\n\n.nav.evaluation[_ngcontent-%COMP%] {\n  background-color: #fbc02d;\n  top: 0.40625rem;\n  left: -0.25rem; }\n  .landing[_ngcontent-%COMP%]   .nav.evaluation[_ngcontent-%COMP%] {\n    top: 0.8125rem;\n    left: -0.5rem; }\n  .landing.open[_ngcontent-%COMP%]   .nav.evaluation[_ngcontent-%COMP%] {\n    left: -8.75rem;\n    top: 10rem;\n    border: 4px solid #f0ad05; }\n  .open[_ngcontent-%COMP%]   .nav.evaluation[_ngcontent-%COMP%] {\n    left: 1.75rem;\n    top: 5.5rem; }\n\n.nav[_ngcontent-%COMP%] {\n  mix-blend-mode: multiply;\n  width: 5rem;\n  height: 5rem;\n  border-radius: 5rem;\n  z-index: 1;\n  -webkit-transition: all ease-in-out 0.84s, top cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, left cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, color ease-in-out 0.28s;\n  transition: all ease-in-out 0.84s, top cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, left cubic-bezier(0.5, 1.5, 0.5, 1) 0.84s, color ease-in-out 0.28s; }\n  .nav[_ngcontent-%COMP%]   .nav-text[_ngcontent-%COMP%] {\n    position: absolute;\n    color: inherit;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    font-size: 0.75rem;\n    -webkit-transition: font-size ease-in-out 0.84s;\n    transition: font-size ease-in-out 0.84s; }\n  .nav[_ngcontent-%COMP%]:not(.bg) {\n    position: absolute;\n    color: black; }\n    .nav[_ngcontent-%COMP%]:not(.bg)   .nav-text[_ngcontent-%COMP%] {\n      opacity: 0;\n      -webkit-transition: opacity 0.84s ease-in-out, font-size 0.84s ease-in-out;\n      transition: opacity 0.84s ease-in-out, font-size 0.84s ease-in-out; }\n      .open[_ngcontent-%COMP%]   .nav[_ngcontent-%COMP%]:not(.bg)   .nav-text[_ngcontent-%COMP%] {\n        opacity: 1; }\n  .nav.bg[_ngcontent-%COMP%] {\n    position: relative;\n    margin-left: 1rem;\n    color: white; }\n    .open[_ngcontent-%COMP%]   .nav.bg[_ngcontent-%COMP%] {\n      border: .3125rem solid #eee;\n      color: black; }\n    .nav.bg[_ngcontent-%COMP%]    > .nav-text[_ngcontent-%COMP%] {\n      font-size: 1.25rem; }\n  .nav-container[_ngcontent-%COMP%] {\n    z-index: 20;\n    -webkit-transition: all .86s ease-in-out;\n    transition: all .86s ease-in-out;\n    position: fixed;\n    top: 50%;\n    left: 0;\n    -webkit-transform: translate(0, -50%);\n            transform: translate(0, -50%); }\n    .nav-container.landing[_ngcontent-%COMP%] {\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%);\n      left: 50%;\n      position: absolute; }\n\n.landing[_ngcontent-%COMP%]   .nav[_ngcontent-%COMP%] {\n  width: 10rem;\n  height: 10rem;\n  border-radius: 10rem; }\n  .landing[_ngcontent-%COMP%]   .nav.bg[_ngcontent-%COMP%] {\n    margin-left: 0; }\n    .landing[_ngcontent-%COMP%]   .nav.bg[_ngcontent-%COMP%]    > .nav-text[_ngcontent-%COMP%] {\n      font-size: 2.5rem; }\n  .landing[_ngcontent-%COMP%]   .nav[_ngcontent-%COMP%]   .nav-text[_ngcontent-%COMP%] {\n    font-size: 1.5rem; }\n\n.nav-text[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  z-index: 2; }'];
 //# sourceMappingURL=/Users/antonsidorov/Documents/Programming/Git/it-psm/src/nav.component.scss.shim.ngstyle.js.map
 
 /***/ },
