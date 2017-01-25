@@ -803,4 +803,63 @@ body {
   width: 100vw;
   height: 100vh; }
 
+#analysis nav,
+nav#analysis {
+  background-color: #BB6BD9; }
+
+#design nav,
+nav#design {
+  background-color: #09c; }
+
+#development nav,
+nav#development {
+  background-color: #00e25e; }
+
+#evaluation nav,
+nav#evaluation {
+  background-color: #fbc02d; }
+
+nav {
+  width: 100vw;
+  height: 4rem;
+  color: white;
+  z-index: 1;
+  font-size: 0; }
+  nav p {
+    display: inline-block;
+    height: 4rem;
+    vertical-align: middle;
+    line-height: 4rem;
+    margin-left: 5vmin;
+    font-size: 1.75rem;
+    color: inherit; }
+  .fixed nav {
+    position: fixed;
+    top: 0;
+    left: 0; }
+  .page nav {
+    position: absolute;
+    top: 0;
+    left: 0; }
+
+.page {
+  position: relative;
+  padding-top: 4rem; }
+
+/*
+#landing{
+    height: 100vh;
+}
+.page:after{
+    content: '';
+    display:block;
+    height: 10rem;
+}
+*/
+ul > li {
+  display: list-item;
+  text-transform: capitalize;
+  margin: 1rem;
+  margin-left: 3rem; }
+
 /*# sourceMappingURL=styles.bundle.map*/
