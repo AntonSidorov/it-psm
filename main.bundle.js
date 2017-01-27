@@ -141,6 +141,7 @@ var AppComponent = (function () {
             this.nav.autoOpen();
             this.onLanding = true;
         }
+        console.log(this.rects);
         this.navVis[0] = this.rects[1].top <= 0 && this.rects[1].bottom >= 0;
         this.navVis[1] = this.rects[2].top <= 0 && this.rects[2].bottom >= 0;
         this.navVis[2] = this.rects[3].top <= 0 && this.rects[3].bottom >= 0;
@@ -1218,22 +1219,18 @@ var View_AppComponent15 = (function (_super) {
         this._el_4 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'description'), null);
         this._text_5 = this.renderer.createText(this._el_4, '\n    ', null);
         this._el_6 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_7 = this.renderer.createText(this._el_6, 'Planning how the solution will function and its appearance.', null);
+        this._text_7 = this.renderer.createText(this._el_6, 'Determining a strategy for finding out the extent to which the solution meets the required needs of the user.', null);
         this._text_8 = this.renderer.createText(this._el_4, '\n    ', null);
         this._el_9 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_10 = this.renderer.createText(this._el_9, 'The solution design typically involves identifying what specific data is required and how the data will be named, structured,\n      validated and manipulated. Typical design tools for this purpose include data dictionaries and data structure diagrams,\n      input-process-output (IPO) charts, flowcharts, pseudocode, object descriptions. Solution design also involves, where\n      appropriate, showing how the various components of a solution relate to one another, for example web pages, style sheets,\n      scripts; queries, forms, reports; modules, procedures, methods, functions. Typical design tools used to show relationships\n      include storyboards, site maps, entity-relationship diagrams, data flow diagrams, structure charts, hierarchy charts,\n      and context diagrams.\n      ', null);
-        this._el_11 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_12 = this.renderer.createText(this._el_9, ' ', null);
-        this._el_13 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_9, 'br', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_14 = this.renderer.createText(this._el_9, 'Planning the solution also involves determining its appearance, including, where appropriate, the user interface.\n      This typically involves identifying the position and size of text, images and graphics, font types, colours and text\n      enhancements. Design tools used for this purpose include layout diagrams, annotated diagrams/mock ups.\n    ', null);
-        this._text_15 = this.renderer.createText(this._el_4, '\n    ', null);
-        this._el_16 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_17 = this.renderer.createText(this._el_16, 'Determining the evaluation criteria.', null);
-        this._text_18 = this.renderer.createText(this._el_4, '\n    ', null);
-        this._el_19 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_20 = this.renderer.createText(this._el_19, '\n      What measures will be used to judge whether or not the solution meets the requirements? These criteria should arise from\n      the solution requirements identified in the analysis stage.\n    ', null);
-        this._text_21 = this.renderer.createText(this._el_4, '\n  ', null);
-        this._text_22 = this.renderer.createText(this._el_0, '\n', null);
+        this._text_10 = this.renderer.createText(this._el_9, 'Typically this occurs after the solution has been developed. Usually an evaluation strategy would include specifying\n      a timeline, outlining what data will be collected and by what methods and techniques, and how the data relates to the\n      criteria that were generated in the design stage.\n    ', null);
+        this._text_11 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_12 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'h1', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_13 = this.renderer.createText(this._el_12, 'Reporting on the extent to which the solution meets the requirements of the user.', null);
+        this._text_14 = this.renderer.createText(this._el_4, '\n    ', null);
+        this._el_15 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_4, 'p', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
+        this._text_16 = this.renderer.createText(this._el_15, '\n      This usually takes place after the solution has been used by the user/client and is based on the criteria generated in the\n      design stage.\n    ', null);
+        this._text_17 = this.renderer.createText(this._el_4, '\n  ', null);
+        this._text_18 = this.renderer.createText(this._el_0, '\n', null);
         this.init(this._el_0, (this.renderer.directRenderer ? null : [
             this._el_0,
             this._text_1,
@@ -1246,18 +1243,14 @@ var View_AppComponent15 = (function (_super) {
             this._text_8,
             this._el_9,
             this._text_10,
-            this._el_11,
-            this._text_12,
-            this._el_13,
+            this._text_11,
+            this._el_12,
+            this._text_13,
             this._text_14,
-            this._text_15,
-            this._el_16,
+            this._el_15,
+            this._text_16,
             this._text_17,
-            this._text_18,
-            this._el_19,
-            this._text_20,
-            this._text_21,
-            this._text_22
+            this._text_18
         ]), null);
         return null;
     };
@@ -1575,7 +1568,7 @@ var View_AppComponent0 = (function (_super) {
  * @suppress {suspiciousCode,uselessCode,missingProperties}
  */
 /* tslint:disable */
-var styles = ['.description[_ngcontent-%COMP%] {\n  margin: 1rem 15rem; }\n  .description[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n    font-size: 2rem;\n    font-weight: 300; }\n  .description[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n    margin: 2rem 0;\n    margin-left: 1rem;\n    line-height: 1.2rem;\n    margin-bottom: 4rem; }'];
+var styles = ['.description[_ngcontent-%COMP%] {\n  margin: 1rem 15rem;\n  margin-top: 8rem; }\n  .description[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n    font-size: 2.4rem;\n    font-weight: 200; }\n  .description[_ngcontent-%COMP%]   p[_ngcontent-%COMP%], .description[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%] {\n    margin: 2rem 0;\n    margin-left: 1rem;\n    font-size: 1.2rem;\n    font-weight: 300;\n    margin-bottom: 4rem; }\n    .description[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]:last-child, .description[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]:last-child {\n      margin-bottom: 0; }'];
 //# sourceMappingURL=/Users/antonsidorov/Documents/Programming/Git/it-psm/src/app.component.scss.shim.ngstyle.js.map
 
 /***/ },

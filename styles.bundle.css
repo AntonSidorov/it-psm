@@ -797,22 +797,16 @@ app-nav {
   display: block; }
 
 body {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  line-height: 2; }
 
 .page {
   width: 100vw;
+  min-height: 150vh;
   position: relative;
-  padding-top: 4rem; }
-  .page:after {
-    content: '';
-    display: block;
-    height: 10rem; }
-  .page:last-of-type:after {
-    content: '';
-    display: block;
-    height: 30rem; }
-  .page#landing {
-    min-height: 56rem; }
+  display: -webkit-box; }
+  .page:last-of-type, .page:first-of-type {
+    min-height: 100vh; }
 
 #analysis nav,
 nav#analysis {
@@ -856,16 +850,6 @@ nav {
     top: 0;
     left: 0; }
 
-/*
-#landing{
-    height: 100vh;
-}
-.page:after{
-    content: '';
-    display:block;
-    height: 10rem;
-}
-*/
 ul > li {
   display: list-item;
   text-transform: capitalize;
