@@ -12,27 +12,18 @@ app-nav {
 
 body {
     overflow-x: hidden;
+    line-height: 2;
 }
 
 .page {
     width: 100vw;
-    &:after{
-        content:'';
-        display:block;
-        height: 10rem;
-    }
-    &:last-of-type{
-        &:after{
-            content: '';
-            display:block;
-            height: 30rem;
-        }
-    }
+    //105 so that there's a bit of scrolling room before the next nav
+    min-height: 150vh;
     //If we need unique styles
     position: relative;
-    padding-top: 4rem;
-    &#landing {
-        min-height: 56rem;
+    display:-webkit-box;
+    &:last-of-type,&:first-of-type{
+        min-height: 100vh;
     }
 }
 
@@ -73,19 +64,6 @@ nav {
         left: 0;
     }
 }
-
-//alternative page style:
-
-/*
-#landing{
-    height: 100vh;
-}
-.page:after{
-    content: '';
-    display:block;
-    height: 10rem;
-}
-*/
 
 ul>li {
     display: list-item;
