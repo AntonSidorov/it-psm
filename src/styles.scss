@@ -16,13 +16,24 @@ body {
 
 .page {
     width: 100vw;
-    height: 100vh;
+    &:after{
+        content:'';
+        display:block;
+        height: 10rem;
+    }
+    &:last-of-type{
+        &:after{
+            content: '';
+            display:block;
+            height: 30rem;
+        }
+    }
     //If we need unique styles
-    &.landing {}
-    &.analysis {}
-    &.design {}
-    &.development {}
-    &.evaluation {}
+    position: relative;
+    padding-top: 4rem;
+    &#landing {
+        min-height: 56rem;
+    }
 }
 
 @for $i from 1 through length($names) {
@@ -61,11 +72,6 @@ nav {
         top: 0;
         left: 0;
     }
-}
-
-.page {
-    position: relative;
-    padding-top: 4rem;
 }
 
 //alternative page style:
