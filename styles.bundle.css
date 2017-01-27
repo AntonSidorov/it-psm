@@ -801,7 +801,18 @@ body {
 
 .page {
   width: 100vw;
-  height: 100vh; }
+  position: relative;
+  padding-top: 4rem; }
+  .page:after {
+    content: '';
+    display: block;
+    height: 10rem; }
+  .page:last-of-type:after {
+    content: '';
+    display: block;
+    height: 30rem; }
+  .page#landing {
+    min-height: 56rem; }
 
 #analysis nav,
 nav#analysis {
@@ -844,10 +855,6 @@ nav {
     position: absolute;
     top: 0;
     left: 0; }
-
-.page {
-  position: relative;
-  padding-top: 4rem; }
 
 /*
 #landing{
