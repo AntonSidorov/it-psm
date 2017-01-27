@@ -67,8 +67,6 @@ export class AppComponent implements AfterViewInit {
       this.onLanding = true;
     }
 
-    console.log(this.rects);
-
     this.navVis[0] = this.rects[1].top <= 0 && this.rects[1].bottom >= 0;
     this.navVis[1] = this.rects[2].top <= 0 && this.rects[2].bottom >= 0;
     this.navVis[2] = this.rects[3].top <= 0 && this.rects[3].bottom >= 0;
